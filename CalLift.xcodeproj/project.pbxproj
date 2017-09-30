@@ -1,0 +1,449 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F151C0631F80603C001B61EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F151C0621F80603C001B61EF /* AppDelegate.swift */; };
+		F151C0651F80603C001B61EF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F151C0641F80603C001B61EF /* ViewController.swift */; };
+		F151C0681F80603C001B61EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F151C0661F80603C001B61EF /* Main.storyboard */; };
+		F151C06A1F80603C001B61EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F151C0691F80603C001B61EF /* Assets.xcassets */; };
+		F151C06D1F80603C001B61EF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F151C06B1F80603C001B61EF /* LaunchScreen.storyboard */; };
+		F151C0781F80603C001B61EF /* CalLiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F151C0771F80603C001B61EF /* CalLiftTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F151C0741F80603C001B61EF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F151C0571F80603C001B61EF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F151C05E1F80603C001B61EF;
+			remoteInfo = CalLift;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F151C05F1F80603C001B61EF /* CalLift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalLift.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F151C0621F80603C001B61EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F151C0641F80603C001B61EF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F151C0671F80603C001B61EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F151C0691F80603C001B61EF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F151C06C1F80603C001B61EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F151C06E1F80603C001B61EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F151C0731F80603C001B61EF /* CalLiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalLiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F151C0771F80603C001B61EF /* CalLiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalLiftTests.swift; sourceTree = "<group>"; };
+		F151C0791F80603C001B61EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F151C05C1F80603C001B61EF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F151C0701F80603C001B61EF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F151C0561F80603C001B61EF = {
+			isa = PBXGroup;
+			children = (
+				F151C0611F80603C001B61EF /* CalLift */,
+				F151C0761F80603C001B61EF /* CalLiftTests */,
+				F151C0601F80603C001B61EF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F151C0601F80603C001B61EF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F151C05F1F80603C001B61EF /* CalLift.app */,
+				F151C0731F80603C001B61EF /* CalLiftTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F151C0611F80603C001B61EF /* CalLift */ = {
+			isa = PBXGroup;
+			children = (
+				F151C0621F80603C001B61EF /* AppDelegate.swift */,
+				F151C0641F80603C001B61EF /* ViewController.swift */,
+				F151C0661F80603C001B61EF /* Main.storyboard */,
+				F151C0691F80603C001B61EF /* Assets.xcassets */,
+				F151C06B1F80603C001B61EF /* LaunchScreen.storyboard */,
+				F151C06E1F80603C001B61EF /* Info.plist */,
+			);
+			path = CalLift;
+			sourceTree = "<group>";
+		};
+		F151C0761F80603C001B61EF /* CalLiftTests */ = {
+			isa = PBXGroup;
+			children = (
+				F151C0771F80603C001B61EF /* CalLiftTests.swift */,
+				F151C0791F80603C001B61EF /* Info.plist */,
+			);
+			path = CalLiftTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F151C05E1F80603C001B61EF /* CalLift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F151C07C1F80603C001B61EF /* Build configuration list for PBXNativeTarget "CalLift" */;
+			buildPhases = (
+				F151C05B1F80603C001B61EF /* Sources */,
+				F151C05C1F80603C001B61EF /* Frameworks */,
+				F151C05D1F80603C001B61EF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CalLift;
+			productName = CalLift;
+			productReference = F151C05F1F80603C001B61EF /* CalLift.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F151C0721F80603C001B61EF /* CalLiftTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F151C07F1F80603C001B61EF /* Build configuration list for PBXNativeTarget "CalLiftTests" */;
+			buildPhases = (
+				F151C06F1F80603C001B61EF /* Sources */,
+				F151C0701F80603C001B61EF /* Frameworks */,
+				F151C0711F80603C001B61EF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F151C0751F80603C001B61EF /* PBXTargetDependency */,
+			);
+			name = CalLiftTests;
+			productName = CalLiftTests;
+			productReference = F151C0731F80603C001B61EF /* CalLiftTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F151C0571F80603C001B61EF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0900;
+				LastUpgradeCheck = 0900;
+				ORGANIZATIONNAME = "Edmund Mok";
+				TargetAttributes = {
+					F151C05E1F80603C001B61EF = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
+					F151C0721F80603C001B61EF = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+						TestTargetID = F151C05E1F80603C001B61EF;
+					};
+				};
+			};
+			buildConfigurationList = F151C05A1F80603C001B61EF /* Build configuration list for PBXProject "CalLift" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F151C0561F80603C001B61EF;
+			productRefGroup = F151C0601F80603C001B61EF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F151C05E1F80603C001B61EF /* CalLift */,
+				F151C0721F80603C001B61EF /* CalLiftTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F151C05D1F80603C001B61EF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F151C06D1F80603C001B61EF /* LaunchScreen.storyboard in Resources */,
+				F151C06A1F80603C001B61EF /* Assets.xcassets in Resources */,
+				F151C0681F80603C001B61EF /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F151C0711F80603C001B61EF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F151C05B1F80603C001B61EF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F151C0651F80603C001B61EF /* ViewController.swift in Sources */,
+				F151C0631F80603C001B61EF /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F151C06F1F80603C001B61EF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F151C0781F80603C001B61EF /* CalLiftTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F151C0751F80603C001B61EF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F151C05E1F80603C001B61EF /* CalLift */;
+			targetProxy = F151C0741F80603C001B61EF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F151C0661F80603C001B61EF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F151C0671F80603C001B61EF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F151C06B1F80603C001B61EF /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F151C06C1F80603C001B61EF /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F151C07A1F80603C001B61EF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F151C07B1F80603C001B61EF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F151C07D1F80603C001B61EF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 93J5N959FE;
+				INFOPLIST_FILE = CalLift/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.edmundmok.CalLift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F151C07E1F80603C001B61EF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 93J5N959FE;
+				INFOPLIST_FILE = CalLift/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.edmundmok.CalLift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F151C0801F80603C001B61EF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 93J5N959FE;
+				INFOPLIST_FILE = CalLiftTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.edmundmok.CalLiftTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CalLift.app/CalLift";
+			};
+			name = Debug;
+		};
+		F151C0811F80603C001B61EF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 93J5N959FE;
+				INFOPLIST_FILE = CalLiftTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.edmundmok.CalLiftTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CalLift.app/CalLift";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F151C05A1F80603C001B61EF /* Build configuration list for PBXProject "CalLift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F151C07A1F80603C001B61EF /* Debug */,
+				F151C07B1F80603C001B61EF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F151C07C1F80603C001B61EF /* Build configuration list for PBXNativeTarget "CalLift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F151C07D1F80603C001B61EF /* Debug */,
+				F151C07E1F80603C001B61EF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F151C07F1F80603C001B61EF /* Build configuration list for PBXNativeTarget "CalLiftTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F151C0801F80603C001B61EF /* Debug */,
+				F151C0811F80603C001B61EF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F151C0571F80603C001B61EF /* Project object */;
+}
