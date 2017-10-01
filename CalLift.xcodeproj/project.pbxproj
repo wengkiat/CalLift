@@ -13,6 +13,7 @@
 		77B254211F80CC5D00738C80 /* BookingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B254201F80CC5D00738C80 /* BookingVC.swift */; };
 		77B254271F810F6F00738C80 /* KoneFloor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B254261F810F6E00738C80 /* KoneFloor.swift */; };
 		F101B7801F813500004B4570 /* KoneLift.swift in Sources */ = {isa = PBXBuildFile; fileRef = F101B77F1F813500004B4570 /* KoneLift.swift */; };
+		77B254291F811EF700738C80 /* ScanState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B254281F811EF700738C80 /* ScanState.swift */; };
 		F151C0631F80603C001B61EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F151C0621F80603C001B61EF /* AppDelegate.swift */; };
 		F151C0651F80603C001B61EF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F151C0641F80603C001B61EF /* ViewController.swift */; };
 		F151C0681F80603C001B61EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F151C0661F80603C001B61EF /* Main.storyboard */; };
@@ -45,6 +46,7 @@
 		77B254231F80FE8800738C80 /* 1200px-KONE.svg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1200px-KONE.svg.png"; sourceTree = "<group>"; };
 		77B254261F810F6E00738C80 /* KoneFloor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KoneFloor.swift; path = CalLift/Models/KoneFloor.swift; sourceTree = SOURCE_ROOT; };
 		F101B77F1F813500004B4570 /* KoneLift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoneLift.swift; sourceTree = "<group>"; };
+		77B254281F811EF700738C80 /* ScanState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanState.swift; sourceTree = "<group>"; };
 		F151C05F1F80603C001B61EF /* CalLift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalLift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F151C0621F80603C001B61EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F151C0641F80603C001B61EF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 			children = (
 				77B254261F810F6E00738C80 /* KoneFloor.swift */,
 				F101B77F1F813500004B4570 /* KoneLift.swift */,
+				77B254281F811EF700738C80 /* ScanState.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				F151C08E1F808866001B61EF /* LiftCalendar.swift in Sources */,
 				F16B8FFA1F80911400757225 /* CalendarPermissionsManager.swift in Sources */,
 				F151C0871F806AD9001B61EF /* BluetoothScannerDelegate.swift in Sources */,
+				77B254291F811EF700738C80 /* ScanState.swift in Sources */,
 				7737BE131F80C6B200425739 /* ColoredButton.swift in Sources */,
 				F151C0841F8067E2001B61EF /* BluetoothScanner.swift in Sources */,
 				77B2541F1F80C9FF00738C80 /* Extensions.swift in Sources */,

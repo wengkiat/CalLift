@@ -18,12 +18,13 @@ class BluetoothScanner: NSObject {
         super.init()
         self.manager = CBCentralManager(delegate: self, queue: nil)
         self.manager.delegate = self
+        print("Initializing CB manager")
     }
 
     func startScanning() {
         self.manager.scanForPeripherals(withServices: nil, options: [
             CBCentralManagerScanOptionAllowDuplicatesKey: true
-            ])
+        ])
     }
 
     func stopScanning() {
@@ -42,11 +43,15 @@ extension BluetoothScanner: CBCentralManagerDelegate {
         }
         guard let uuid = uuids.firstObject as? CBUUID else { return }
         guard uuid == Constants.Bluetooth.uuid else { return }
-        self.delegate?.nearbyBluetoothDevicesUpdated()
+        self.delegate?.foundUUID(uuid.uuidString)
     }
 
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        self.delegate?.readyToScan()
+        switch central.state {
+        case .poweredOn:
+            self.delegate?.readyToScan()
+        default: break
+        }
     }
 
 }

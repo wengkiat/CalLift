@@ -14,11 +14,12 @@ class BookingVC: UIViewController {
     @IBOutlet weak var nextEventLbl: UILabel!
     @IBOutlet weak var nextEventLocation: UILabel!
     @IBOutlet weak var nextEventStartScanLbl: UILabel!
-    @IBOutlet weak var nextEventCountdownLbl: UILabel!
+    @IBOutlet weak var nextEventMinLbl: UILabel!
+    @IBOutlet weak var nextEventSecLbl: UILabel!
     
     @IBOutlet weak var sourceView: UIView!
     @IBOutlet weak var sourceDescription: UILabel!
-    @IBOutlet weak var sourceLocation: UILabel!
+    @IBOutlet weak var sourceArea: UILabel!
     
     @IBOutlet weak var destinationView: UIView!
     @IBOutlet weak var destinationDescription: UILabel!
@@ -26,11 +27,19 @@ class BookingVC: UIViewController {
     
     var callNowBtn: ColoredButton?
     
+    var countdownSec: Double = 10 * 60 + 5
+    var countdownTimer: Timer?
+    
+    var scanState = ScanState.stopped
+    var floors: [KoneFloor] = []
+    
+    let calendar = LiftCalendar()
+    let scanner = BluetoothScanner()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupData()
         setupView()
-        
-        KoneManager.instance.getFloors(completionHandler: showDestinations)
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -39,20 +48,72 @@ class BookingVC: UIViewController {
     
     // MARK: - SETUP
     // MARK: Data
-    func showDestinations(_ floors: [KoneFloor]) {
-        print(floors)
+    func setupData() {
+        KoneManager.instance.getFloors(completionHandler: setDestinations)
+        setupTimer()
+        setupBluetooth()
     }
     
+    func setDestinations(_ floors: [KoneFloor]) {
+        self.floors = floors
+    }
+    
+    func setupTimer() {
+        self.countdownTimer = Timer.scheduledTimer(
+            timeInterval: 1,
+            target: self,
+            selector: #selector(countdownTime),
+            userInfo: nil,
+            repeats: true
+        )
+    }
+    
+    func setupBluetooth() {
+        scanner.delegate = self
+    }
+    
+    @objc func countdownTime() {
+        self.countdownSec -= 1
+        self.updateEventCountdownLbl()
+        if self.countdownSec == 0 {
+            self.countdownTimer?.invalidate()
+        }
+        if countdownSec < 600 {
+            startScan()
+        }
+    }
     
     // MARK: Views
     func setupView() {
         setupBgView()
         setupEventViews()
         setupCallNowBtn()
+        
+        if Constants.isDemo {
+            populateInitialData()
+        }
     }
     
     @objc func showDestinations(_ dict: [String: Any]) {
         print(dict.getItems())
+    }
+    
+    func populateInitialData() {
+        updateEventCountdownLbl()
+        initializeSourceLiftLbl()
+    }
+    
+    func initializeSourceLiftLbl() {
+        sourceArea.text = ""
+        sourceDescription.text =  ""
+        nextEventStartScanLbl.text = scanState.getLoadingLabel()
+    }
+    
+    func padTime(_ timeDigits: Int) -> String {
+        if timeDigits < 10 {
+            return "0" + String(timeDigits)
+        }
+        return String(timeDigits)
     }
     
     func setupBgView() {
@@ -104,6 +165,7 @@ class BookingVC: UIViewController {
     }
     
     // MARK: - UPDATE
+    // MARK: Button handler
     @objc func callNowBtnTouched(_ sender: AnyObject?) {
         if sender === self.callNowBtn!.subviews.last {
             print("CALL LIFT NOW")
@@ -138,5 +200,58 @@ class BookingVC: UIViewController {
     func chooseDestinationLocation() {
         print("Choose dest Location")
     }
+    
+    // MARK: Time state
+    func updateEventCountdownLbl() {
+        let minute = Int(floor(countdownSec / 60))
+        let seconds = Int(countdownSec.truncatingRemainder(dividingBy: 60.0))
+        self.nextEventMinLbl.text = "\(padTime(minute))"
+        self.nextEventSecLbl.text = "\(padTime(seconds))"
+    }
 
+    // MARK: BLE state
+    // stop -> start
+    func startScan() {
+        if scanState == .stopped, scanner.manager.state == .poweredOn {
+            scanState = .started
+            startScanningAnimation()
+            // acquires fast so delay to simulate finding
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+                self.nextEventStartScanLbl.text = self.scanState.getLoadingLabel()
+                self.scanner.startScanning()
+            })
+        }
+        
+    }
+    
+    func startScanningAnimation() {
+        UIView.animate(withDuration: 1, animations: {
+            self.sourceView.backgroundColor = UIColor.orange
+            self.sourceArea.text = "Searching for current area"
+        })
+    }
+    
+    // start -> found
+    func foundSourceAnimation(area: String, floor: String) {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.sourceView.backgroundColor = Constants.Colors.flatGreen
+            self.sourceDescription.text = floor
+            self.sourceArea.text = area
+        })
+    }
+}
+
+extension BookingVC: BluetoothScannerDelegate {
+    
+    func readyToScan() {
+        NSLog("Scanner is ready")
+    }
+    
+    func foundUUID(_ uuid: String) {
+        NSLog("Found uuid \(uuid)")
+        // TODO: Replace with iBeacon BLE Message
+        foundSourceAnimation(area: Constants.Mock.Source.area, floor: Constants.Mock.Source.floor)
+        scanner.stopScanning()
+    }
+    
 }

@@ -53,6 +53,17 @@ struct Constants {
         }
     }
     
+    struct Mock {
+        struct Source {
+            static let floor = "Basement 1"
+            static let area = "Lift Lobby B1A"
+        }
+        struct Destination {
+            static let floor = "Penhouse Floor"
+            static let area = "PnP Conference Room"
+        }
+    }
+    
     struct Colors {
         static let flatGray = UIColor(red: 149/255.0, green: 165/255.0, blue: 166/255.0, alpha: 1.0)
         static let flatDarkGreen = UIColor(red: 39/255.0, green: 174/255.0, blue: 96/255.0, alpha: 1.0)

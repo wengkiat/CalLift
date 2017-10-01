@@ -9,7 +9,6 @@
 import Foundation
 
 class KoneManager {
-    private init() {}
     static let instance = KoneManager()
     private let session = URLSession.shared
 
