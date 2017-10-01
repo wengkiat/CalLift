@@ -32,6 +32,7 @@ class CalendarPermissionsManager {
 
     private func requestAccess() {
         EKEventStore().requestAccess(to: .event) { (accessGranted, error) in
+            guard !accessGranted else { return }
             DispatchQueue.main.async {
                 self.getPermissions()
             }

@@ -35,8 +35,11 @@ class BluetoothScanner: NSObject {
 // MARK: CBCentralManagerDelegate
 extension BluetoothScanner: CBCentralManagerDelegate {
 
-    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        guard let uuids = advertisementData[Constants.Bluetooth.uuidKey] as? NSMutableArray else { return }
+    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral,
+                        advertisementData: [String : Any], rssi RSSI: NSNumber) {
+        guard let uuids = advertisementData[Constants.Bluetooth.uuidKey] as? NSMutableArray else {
+            return
+        }
         guard let uuid = uuids.firstObject as? CBUUID else { return }
         guard uuid == Constants.Bluetooth.uuid else { return }
         self.delegate?.nearbyBluetoothDevicesUpdated()
