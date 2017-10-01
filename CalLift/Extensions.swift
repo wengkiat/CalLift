@@ -6,7 +6,7 @@
 //  Copyright © 2017 Edmund Mok. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension Data {
     func toDictionary() -> [String: Any]? {
@@ -34,5 +34,38 @@ extension Dictionary where Key == String, Value == Any {
             }
         }
         return result
+    }
+}
+
+extension UIView {
+    func setCornerRadius(radius: CGFloat) {
+        layer.cornerRadius = radius
+    }
+    
+    func setShadow() {
+        self.layer.shadowColor = UIColor.darkGray.cgColor
+        self.layer.shadowOpacity = 0.5
+        self.layer.shadowRadius = 6
+        self.layer.shadowOffset = CGSize(width: 6.0, height: 6.0)
+    }
+    
+    func setBlur(style: UIBlurEffectStyle=UIBlurEffectStyle.light, corner: CGFloat=0.0,
+                 alpha: CGFloat=1.0, replaceViewAlpha: Bool=false, id: String?=nil) {
+        let blurEffect = UIBlurEffect(style: style)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = self.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        blurEffectView.alpha = alpha
+        if corner > 0 {
+            blurEffectView.layer.cornerRadius = corner
+            blurEffectView.clipsToBounds = true
+        }
+        if replaceViewAlpha {
+            self.backgroundColor = UIColor.clear
+        }
+        if let accessibilityId = id {
+            blurEffectView.accessibilityIdentifier = accessibilityId
+        }
+        self.insertSubview(blurEffectView, at: 0)
     }
 }

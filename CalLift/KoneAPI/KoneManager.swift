@@ -20,28 +20,42 @@ class KoneManager {
         getFloors { self.floors = $0 }
     }
 
+    func getFloor(at level: Int) -> KoneFloor? {
+        return floors.first { $0.typicalLevel == level }
+    }
+
     func bookLift(from startFloor: Int, to endFloor: Int, completion: @escaping (_ message: String) -> Void) {
+        populateFloorData()
+        guard let startLevel = getFloor(at: startFloor)?.typicalLevel,
+            let endLevel = getFloor(at: endFloor)?.typicalLevel else {
+                return
+        }
+
         let postJson =
         """
             {
               "template": {
                 "data": [
-                  {"name":"sourceAreaId", "value": "area:\(Constants.KoneAPI.buildingId):1000"},
-                  {"name":"destinationAreaId", "value": "area:\(Constants.KoneAPI.buildingId):2000"}
+                  {"name":"sourceAreaId", "value": "area:\(Constants.KoneAPI.buildingId):\(startLevel)"},
+                  {"name":"destinationAreaId", "value": "area:\(Constants.KoneAPI.buildingId):\(endLevel)"}
                 ]
               }
             }
         """
         let postData = NSData(data: postJson.data(using: .utf8)!) as Data
-
         let apiEndpoint = "https://api.kone.com/api/building/\(Constants.KoneAPI.buildingId)/call"
         var request = URLRequest(url: URL(string: apiEndpoint)!)
         request.httpMethod = Constants.KoneAPI.postMethod
         request.allHTTPHeaderFields = Constants.KoneAPI.getHeaders(contentType: .collection, acceptType: .api)
         request.httpBody = postData
         submitTask(with: request) { (response, _) in
+            print("CALLED!")
             // Get the call id from this data.
             print(response)
+            guard let transactionID = response.value(forKey: "X-Global-Transaction-ID") as? String else {
+                return
+            }
+            print(transactionID)
         }
     }
 
@@ -126,8 +140,10 @@ class KoneManager {
                     NSLog("Parse JSON \(response)")
                     return
                 }
+                print("response: \(response)")
+                print("data: \(data)")
                 completionHandler(response, data!)
             }
-            }.resume()
+        }.resume()
     }
 }
