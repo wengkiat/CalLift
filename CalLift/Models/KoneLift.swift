@@ -1,5 +1,5 @@
 //
-//  KoneFloor.swift
+//  KoneLift.swift
 //  CalLift
 //
 //  Created by Edmund Mok on 10/1/17.
@@ -8,16 +8,20 @@
 
 import Foundation
 
-struct KoneFloor {
+struct KoneLift {
+
     let id: String
-    let index: Int
+    let KEN: String
     let name: String
-    let typicalLevel: Int
+    let type: String
+    let monitoringEnabled: Bool
 
     init(dict: NSDictionary) {
         self.id = dict.value(forKey: "id") as! String
-        self.index = dict.value(forKey: "index") as! Int
+        self.KEN = dict.value(forKey: "KEN") as! String
         self.name = dict.value(forKey: "name") as! String
-        self.typicalLevel = dict.value(forKey: "typicalLevel") as! Int
+        self.type = dict.value(forKey: "type") as! String
+        self.monitoringEnabled = dict.value(forKey: "monitoringEnabled") as! Bool
     }
+
 }

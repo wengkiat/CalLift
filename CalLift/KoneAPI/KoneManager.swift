@@ -14,6 +14,7 @@ class KoneManager {
     private let session = URLSession.shared
 
     var floors = [KoneFloor]()
+    var lifts = [KoneLift]()
 
     func populateFloorData(completionHandler: @escaping () -> Void) {
         guard floors.isEmpty else { return }
@@ -23,18 +24,24 @@ class KoneManager {
         }
     }
 
-    func getFloor(at level: Int) -> KoneFloor? {
-        return floors.first { $0.typicalLevel == level }
+    func populateLiftData(completionHandler: @escaping() -> Void) {
+        guard lifts.isEmpty else { return }
+        getLifts {
+            self.lifts = $0
+            completionHandler()
+        }
     }
 
-    func bookLift(from startFloor: Int, to endFloor: Int, completion: @escaping (_ message: String) -> Void) {
+    func getLevel(at floor: String) -> Int? {
+        return floors.first { String($0.name.split(separator: " ").last!) == floor }?.typicalLevel
+    }
+
+    func bookLift(from startFloor: String, to endFloor: String, completion: @escaping (_ lift: KoneLift) -> Void) {
         populateFloorData() { [weak self] in
-            print(self?.floors)
-            guard let startLevel = self?.getFloor(at: startFloor)?.typicalLevel,
-                let endLevel = self?.getFloor(at: endFloor)?.typicalLevel else {
+            guard let startLevel = self?.getLevel(at: startFloor),
+                let endLevel = self?.getLevel(at: endFloor) else {
                     return
             }
-
             let postJson = """
             {
                 "template": {
@@ -53,34 +60,38 @@ class KoneManager {
             request.httpBody = postData
             self?.submitTask(with: request) { (response, data) in
                 // Get the call id from this data.
-                print("Post response: \(response)")
-                print("Post data: \(data)")
                 guard let res = response as? HTTPURLResponse else { return }
                 guard let headers = res.allHeaderFields as? [String : String] else { return }
                 let callID = String(headers["Location"]!.split(separator: "/").last!)
 
-                // Use the call id to get the assigned lift
-                self?.getAssignedLift(callId: callID) { _ in
-                    
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    // Use the call id to get the assigned lift
+                    self?.getAssignedLift(callId: callID) { lift in
+                        completion(lift)
+                    }
                 }
             }
         }
 
     }
 
-    func getAssignedLift(callId: String, completion: @escaping(_ message: String) -> Void) {
+    func getAssignedLift(callId: String, completion: @escaping(_ lift: KoneLift) -> Void) {
         let urlEndpoint = "https://api.kone.com/api/building/\(Constants.KoneAPI.buildingId)/call/\(callId)"
+        print("URL: \(urlEndpoint)")
         var request = URLRequest(url: URL(string: urlEndpoint)!)
-        request.httpMethod = "GET"
+        request.httpMethod = Constants.KoneAPI.getMethod
         request.allHTTPHeaderFields = Constants.KoneAPI.getHeaders(contentType: .collection, acceptType: .api)
 
-        submitTask(with: request) { (_, data) in
+        submitTask(with: request) { [weak self] (response, data) in
             // Parse data to get lift floor and door state
             guard let json = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] else { return }
-            print(json)
-            guard let data = json["data"] as? [[String : Any]] else { return }
-            print(data)
-            completion("1")
+            guard let links = json["links"] as? [String: Any] else { return }
+            guard let assignedLiftIdUrl = links["lift elevator item"] as? String else { return }
+            let assignedLiftId = String(assignedLiftIdUrl.split(separator: "/").last!)
+            print("ass: \(assignedLiftId)")
+            print(self?.lifts)
+            let lift = self?.lifts.first { $0.id == assignedLiftId }
+            completion(lift!)
         }
     }
 
@@ -115,6 +126,23 @@ class KoneManager {
                 return KoneFloor(dict: attr)
             }
             completionHandler(floors)
+        }
+    }
+
+    func getLifts(completionHandler: @escaping(_ lifts: [KoneLift]) -> Void) {
+        let apiEndpoint = "https://api.kone.com/api/building/\(Constants.KoneAPI.buildingId)/lift"
+        var request = URLRequest(url: URL(string: apiEndpoint)!)
+        request.httpMethod = Constants.KoneAPI.getMethod
+        request.allHTTPHeaderFields = Constants.KoneAPI.getHeaders(contentType: .collection, acceptType: .api)
+        submitTask(with: request) { (_, data) in
+            guard let json = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else { return }
+            guard let data = json["data"] as? NSArray else { return }
+            let lifts: [KoneLift] = data.map {
+                guard let dict = $0 as? NSDictionary else { fatalError() }
+                guard let attr = dict.value(forKey: "attributes") as? NSDictionary else { fatalError() }
+                return KoneLift(dict: attr)
+            }
+            completionHandler(lifts)
         }
     }
 
