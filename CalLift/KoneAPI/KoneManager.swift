@@ -16,7 +16,8 @@ class KoneManager {
     var floors = [KoneFloor]()
     
     func populateFloorData() {
-        
+        guard floors.isEmpty else { return }
+        getFloors() { self.floors = $0 }
     }
 
     func bookLift(from startFloor: Int, to endFloor: Int, completion: @escaping (_ message: String) -> Void) {
