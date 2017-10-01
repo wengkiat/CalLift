@@ -12,6 +12,7 @@ class WaitingViewController: UIViewController {
 
     // Passed by delegate
     var assignedLift: KoneLift!
+    var timer: Timer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,11 +21,15 @@ class WaitingViewController: UIViewController {
     }
 
     func startPollingForLiftUpdates() {
-        
+        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [unowned self] _ in
+            KoneManager.instance.getLiftState(liftId: self.assignedLift.id) { state in
+                print(state)
+            }
+        }
     }
 
     func stopPollingForLiftUpdates() {
-
+        timer?.invalidate()
     }
 
 }
