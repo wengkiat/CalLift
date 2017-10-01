@@ -21,9 +21,11 @@ class ViewController: UIViewController {
         CalendarPermissionsManager.sharedInstance.getPermissions()
         scanner.delegate = self
         calendar.loadCalendars()
-        print(calendar.getUpcomingEvents()[2])
+//        print(calendar.getUpcomingEvents()[2])
         let parser = LiftEventParser(event: calendar.getUpcomingEvents()[2])
-        print(parser.parse())
+//        print(parser.parse())
+
+        KoneManager.instance.getLevels(liftId: "lift:9990000508:1:2", completion: {_ in return})
     }
 
     override func didReceiveMemoryWarning() {
