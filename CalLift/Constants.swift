@@ -60,13 +60,14 @@ struct Constants {
             static let area = "Lift Lobby B1A"
         }
         struct Destination {
-            static let index = 4
-            static let floor = "Floor 3"
+            static let index = 10
+            static let floor = "Floor 10"
             static let area = "PnP Conference Room Lift"
         }
     }
     
     struct Colors {
+        static let flatRed = UIColor(red: 231/255.0, green: 76/255.0, blue: 60/255.0, alpha: 1.0)
         static let flatYellow = UIColor(red: 241/255.0, green: 196/255.0, blue: 15/255.0, alpha: 1.0)
         static let flatOrange = UIColor(red: 230/255.0, green: 126/255.0, blue: 34/255.0, alpha: 1.0)
         static let flatGray = UIColor(red: 149/255.0, green: 165/255.0, blue: 166/255.0, alpha: 1.0)
