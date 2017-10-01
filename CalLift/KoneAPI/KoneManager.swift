@@ -98,14 +98,12 @@ class KoneManager {
             guard let links = json["links"] as? [String: Any] else { return }
             guard let assignedLiftIdUrl = links["lift elevator item"] as? String else { return }
             let assignedLiftId = String(assignedLiftIdUrl.split(separator: "/").last!)
-            print("ass: \(assignedLiftId)")
-            print(self?.lifts)
             let lift = self?.lifts.first { $0.id == assignedLiftId }
             completion(lift!)
         }
     }
 
-    func getLiftState(liftId: String, completion: @escaping (_ message: String) -> Void) {
+    func getLiftState(liftId: String, completion: @escaping (_ state: LiftState) -> Void) {
         let urlEndpoint = "https://api.kone.com/api/building/\(Constants.KoneAPI.buildingId)/lift/\(liftId)/liftstate"
         var request = URLRequest(url: URL(string: urlEndpoint)!)
         request.httpMethod = Constants.KoneAPI.getMethod
@@ -116,8 +114,7 @@ class KoneManager {
             guard let json = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] else { return }
             guard let collection = json["collection"] as? [String : Any] else { return }
             guard let items = collection["items"] as? [[String: Any]] else { return }
-            print(items)
-            completion("1")
+            completion(LiftState(json: items))
         }
     }
 

@@ -12,10 +12,11 @@
 		77B2541F1F80C9FF00738C80 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B2541E1F80C9FF00738C80 /* Extensions.swift */; };
 		77B254211F80CC5D00738C80 /* BookingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B254201F80CC5D00738C80 /* BookingVC.swift */; };
 		77B254271F810F6F00738C80 /* KoneFloor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B254261F810F6E00738C80 /* KoneFloor.swift */; };
-		F101B7801F813500004B4570 /* KoneLift.swift in Sources */ = {isa = PBXBuildFile; fileRef = F101B77F1F813500004B4570 /* KoneLift.swift */; };
 		77B254291F811EF700738C80 /* ScanState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B254281F811EF700738C80 /* ScanState.swift */; };
+		F101B7801F813500004B4570 /* KoneLift.swift in Sources */ = {isa = PBXBuildFile; fileRef = F101B77F1F813500004B4570 /* KoneLift.swift */; };
+		F101B7821F814519004B4570 /* LiftState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F101B7811F814519004B4570 /* LiftState.swift */; };
+		F101B7881F8151B8004B4570 /* WaitingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F101B7871F8151B8004B4570 /* WaitingViewController.swift */; };
 		F151C0631F80603C001B61EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F151C0621F80603C001B61EF /* AppDelegate.swift */; };
-		F151C0651F80603C001B61EF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F151C0641F80603C001B61EF /* ViewController.swift */; };
 		F151C0681F80603C001B61EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F151C0661F80603C001B61EF /* Main.storyboard */; };
 		F151C06A1F80603C001B61EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F151C0691F80603C001B61EF /* Assets.xcassets */; };
 		F151C06D1F80603C001B61EF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F151C06B1F80603C001B61EF /* LaunchScreen.storyboard */; };
@@ -45,11 +46,12 @@
 		77B254201F80CC5D00738C80 /* BookingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingVC.swift; sourceTree = "<group>"; };
 		77B254231F80FE8800738C80 /* 1200px-KONE.svg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1200px-KONE.svg.png"; sourceTree = "<group>"; };
 		77B254261F810F6E00738C80 /* KoneFloor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KoneFloor.swift; path = CalLift/Models/KoneFloor.swift; sourceTree = SOURCE_ROOT; };
-		F101B77F1F813500004B4570 /* KoneLift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoneLift.swift; sourceTree = "<group>"; };
 		77B254281F811EF700738C80 /* ScanState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanState.swift; sourceTree = "<group>"; };
+		F101B77F1F813500004B4570 /* KoneLift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoneLift.swift; sourceTree = "<group>"; };
+		F101B7811F814519004B4570 /* LiftState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftState.swift; sourceTree = "<group>"; };
+		F101B7871F8151B8004B4570 /* WaitingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingViewController.swift; sourceTree = "<group>"; };
 		F151C05F1F80603C001B61EF /* CalLift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalLift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F151C0621F80603C001B61EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F151C0641F80603C001B61EF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F151C0671F80603C001B61EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F151C0691F80603C001B61EF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F151C06C1F80603C001B61EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				77B254261F810F6E00738C80 /* KoneFloor.swift */,
 				F101B77F1F813500004B4570 /* KoneLift.swift */,
 				77B254281F811EF700738C80 /* ScanState.swift */,
+				F101B7811F814519004B4570 /* LiftState.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -145,13 +148,13 @@
 				77B254241F810F0B00738C80 /* Models */,
 				F151C08B1F80878B001B61EF /* Constants.swift */,
 				F151C0621F80603C001B61EF /* AppDelegate.swift */,
-				F151C0641F80603C001B61EF /* ViewController.swift */,
 				F151C0661F80603C001B61EF /* Main.storyboard */,
 				F151C0691F80603C001B61EF /* Assets.xcassets */,
 				F151C06B1F80603C001B61EF /* LaunchScreen.storyboard */,
 				F151C06E1F80603C001B61EF /* Info.plist */,
 				7737BE101F80C44900425739 /* View */,
 				77B2541E1F80C9FF00738C80 /* Extensions.swift */,
+				F101B7871F8151B8004B4570 /* WaitingViewController.swift */,
 				77B254201F80CC5D00738C80 /* BookingVC.swift */,
 			);
 			path = CalLift;
@@ -296,9 +299,10 @@
 				7737BE131F80C6B200425739 /* ColoredButton.swift in Sources */,
 				F151C0841F8067E2001B61EF /* BluetoothScanner.swift in Sources */,
 				77B2541F1F80C9FF00738C80 /* Extensions.swift in Sources */,
+				F101B7881F8151B8004B4570 /* WaitingViewController.swift in Sources */,
 				7737BE051F80B38200425739 /* KoneManager.swift in Sources */,
 				77B254271F810F6F00738C80 /* KoneFloor.swift in Sources */,
-				F151C0651F80603C001B61EF /* ViewController.swift in Sources */,
+				F101B7821F814519004B4570 /* LiftState.swift in Sources */,
 				F151C0631F80603C001B61EF /* AppDelegate.swift in Sources */,
 				F16B8FFC1F80B6C300757225 /* LiftEventParser.swift in Sources */,
 				F151C08C1F80878B001B61EF /* Constants.swift in Sources */,
@@ -456,7 +460,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8GMX3JSSQ7;
+				DEVELOPMENT_TEAM = 93J5N959FE;
 				INFOPLIST_FILE = CalLift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -472,7 +476,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8GMX3JSSQ7;
+				DEVELOPMENT_TEAM = 93J5N959FE;
 				INFOPLIST_FILE = CalLift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
