@@ -18,6 +18,7 @@
 		F151C08C1F80878B001B61EF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F151C08B1F80878B001B61EF /* Constants.swift */; };
 		F151C08E1F808866001B61EF /* LiftCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F151C08D1F808866001B61EF /* LiftCalendar.swift */; };
 		F16B8FFA1F80911400757225 /* CalendarPermissionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16B8FF91F80911400757225 /* CalendarPermissionsManager.swift */; };
+		F16B8FFC1F80B6C300757225 /* LiftEventParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16B8FFB1F80B6C300757225 /* LiftEventParser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		F151C08B1F80878B001B61EF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F151C08D1F808866001B61EF /* LiftCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftCalendar.swift; sourceTree = "<group>"; };
 		F16B8FF91F80911400757225 /* CalendarPermissionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPermissionsManager.swift; sourceTree = "<group>"; };
+		F16B8FFB1F80B6C300757225 /* LiftEventParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftEventParser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 			children = (
 				F151C08D1F808866001B61EF /* LiftCalendar.swift */,
 				F16B8FF91F80911400757225 /* CalendarPermissionsManager.swift */,
+				F16B8FFB1F80B6C300757225 /* LiftEventParser.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 				F151C0841F8067E2001B61EF /* BluetoothScanner.swift in Sources */,
 				F151C0651F80603C001B61EF /* ViewController.swift in Sources */,
 				F151C0631F80603C001B61EF /* AppDelegate.swift in Sources */,
+				F16B8FFC1F80B6C300757225 /* LiftEventParser.swift in Sources */,
 				F151C08C1F80878B001B61EF /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

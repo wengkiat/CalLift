@@ -20,7 +20,9 @@ class ViewController: UIViewController {
         CalendarPermissionsManager.sharedInstance.getPermissions()
         scanner.delegate = self
         calendar.loadCalendars()
-        print(calendar.getUpcomingEvents())
+        print(calendar.getUpcomingEvents()[2])
+        let parser = LiftEventParser(event: calendar.getUpcomingEvents()[2])
+        print(parser.parse())
     }
 
     override func didReceiveMemoryWarning() {
