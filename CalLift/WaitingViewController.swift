@@ -18,6 +18,9 @@ class WaitingViewController: UIViewController {
     var assignedLift: KoneLift!
     var timer: Timer?
     
+    var srcIdx: Int?
+    var destIdx: Int?
+    
     // Mock
     var maxLevel = KoneManager.instance.floors.count
     var maxHeight = 0
@@ -28,7 +31,7 @@ class WaitingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        startPollingForLiftUpdates()
         setupBgView()
         setupLiftView()
     }
@@ -39,6 +42,11 @@ class WaitingViewController: UIViewController {
     
     func setupLiftView() {
         liftSquareView.setBlur(style: .light, corner: 6.0, replaceViewAlpha: true)
+        guard srcIdx != nil else {
+            NSLog("Not assigned")
+            return
+        }
+        animateToFloor(floor: srcIdx!)
     }
     
     func animateToFloor(floor: Int) {
@@ -62,14 +70,13 @@ class WaitingViewController: UIViewController {
     }
     
     func startPollingForLiftUpdates() {
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [unowned self] _ in
+        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [unowned self] _ in
             KoneManager.instance.getLiftState(liftId: self.assignedLift.id) { state in
                 let floorIdx = KoneManager.instance.floors.index(where: {floor in
                     return floor.typicalLevel == state.level
                 })
                 self.animateToFloor(floor: floorIdx!)
             }
-            
         }
     }
 
