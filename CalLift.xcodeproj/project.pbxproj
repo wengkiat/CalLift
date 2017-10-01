@@ -13,6 +13,8 @@
 		F151C06A1F80603C001B61EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F151C0691F80603C001B61EF /* Assets.xcassets */; };
 		F151C06D1F80603C001B61EF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F151C06B1F80603C001B61EF /* LaunchScreen.storyboard */; };
 		F151C0781F80603C001B61EF /* CalLiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F151C0771F80603C001B61EF /* CalLiftTests.swift */; };
+		F151C0841F8067E2001B61EF /* BluetoothScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = F151C0831F8067E2001B61EF /* BluetoothScanner.swift */; };
+		F151C0871F806AD9001B61EF /* BluetoothScannerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F151C0861F806AD9001B61EF /* BluetoothScannerDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +38,8 @@
 		F151C0731F80603C001B61EF /* CalLiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalLiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F151C0771F80603C001B61EF /* CalLiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalLiftTests.swift; sourceTree = "<group>"; };
 		F151C0791F80603C001B61EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F151C0831F8067E2001B61EF /* BluetoothScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothScanner.swift; sourceTree = "<group>"; };
+		F151C0861F806AD9001B61EF /* BluetoothScannerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothScannerDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +81,7 @@
 		F151C0611F80603C001B61EF /* CalLift */ = {
 			isa = PBXGroup;
 			children = (
+				F151C0851F806A44001B61EF /* Bluetooth */,
 				F151C0621F80603C001B61EF /* AppDelegate.swift */,
 				F151C0641F80603C001B61EF /* ViewController.swift */,
 				F151C0661F80603C001B61EF /* Main.storyboard */,
@@ -94,6 +99,15 @@
 				F151C0791F80603C001B61EF /* Info.plist */,
 			);
 			path = CalLiftTests;
+			sourceTree = "<group>";
+		};
+		F151C0851F806A44001B61EF /* Bluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				F151C0831F8067E2001B61EF /* BluetoothScanner.swift */,
+				F151C0861F806AD9001B61EF /* BluetoothScannerDelegate.swift */,
+			);
+			path = Bluetooth;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,6 +213,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F151C0871F806AD9001B61EF /* BluetoothScannerDelegate.swift in Sources */,
+				F151C0841F8067E2001B61EF /* BluetoothScanner.swift in Sources */,
 				F151C0651F80603C001B61EF /* ViewController.swift in Sources */,
 				F151C0631F80603C001B61EF /* AppDelegate.swift in Sources */,
 			);
