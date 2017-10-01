@@ -6,18 +6,21 @@
 //  Copyright © 2017 Edmund Mok. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class KoneManager {
     static let instance = KoneManager()
     private let session = URLSession.shared
-
+    var picker: UIPickerView?
     var floors = [KoneFloor]()
     var lifts = [KoneLift]()
 
     func populateFloorData(completionHandler: @escaping () -> Void) {
         guard floors.isEmpty else { return }
         getFloors {
+            if self.picker != nil {
+                self.picker?.reloadAllComponents()
+            }
             self.floors = $0
             completionHandler()
         }
@@ -26,6 +29,9 @@ class KoneManager {
     func populateLiftData(completionHandler: @escaping() -> Void) {
         guard lifts.isEmpty else { return }
         getLifts {
+            if self.picker != nil {
+                self.picker?.reloadAllComponents()
+            }
             self.lifts = $0
             completionHandler()
         }

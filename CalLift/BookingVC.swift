@@ -9,7 +9,7 @@
 import UIKit
 import EventKit
 
-class BookingVC: UIViewController {
+class BookingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     @IBOutlet weak var nextEventView: UIView!
     @IBOutlet weak var nextEventLbl: UILabel!
@@ -42,11 +42,16 @@ class BookingVC: UIViewController {
 
     var assignedLift: KoneLift!
     var nextEvent: EKEvent!
+    
+    var picker = UIPickerView()
+    var btnClicked = ""
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupData()
         setupView()
+        setupPicker()
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -59,6 +64,19 @@ class BookingVC: UIViewController {
         setupBluetooth()
         setupEventCalendar()
         setupTimer()
+    }
+    
+    func setupPicker() {
+        picker.frame.origin.x = 0
+        picker.frame.origin.y = 0
+        picker.frame = view.frame
+        picker.setBlur(style: .light, alpha: 0.8, replaceViewAlpha: true)
+        picker.isHidden = true
+        view.addSubview(picker)
+        KoneManager.instance.picker = picker
+
+        picker.delegate = self
+        picker.dataSource = self
     }
     
     func setupTimer() {
@@ -222,12 +240,17 @@ class BookingVC: UIViewController {
     }
     
     func chooseSourceLocation() {
+        btnClicked = "src"
+        picker.reloadAllComponents()
         print("Choose source location")
-        
+        picker.isHidden = false
     }
     
     func chooseDestinationLocation() {
+        btnClicked = "dest"
+        picker.reloadAllComponents()
         print("Choose dest Location")
+        picker.isHidden = false
     }
     
     // MARK: Time state
@@ -251,7 +274,6 @@ class BookingVC: UIViewController {
                 })
             })
         }
-        
     }
     // stop -> start
     func startScanningAnimation() {
@@ -272,6 +294,30 @@ class BookingVC: UIViewController {
             self.sourceArea.text = area
             self.sourceLiftArrivingLbl.text = "Lift arriving at"
         })
+    }
+
+    // MARK: - Picker
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        let rows = KoneManager.instance.floors.count
+        return rows
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if self.btnClicked == "src" {
+            sourceDescription.text = KoneManager.instance.floors[row].name
+        } else if self.btnClicked == "dest" {
+            destinationDescription.text = KoneManager.instance.floors[row].name
+        }
+        self.view.endEditing(true)
+        picker.isHidden = true
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return KoneManager.instance.floors[row].name
     }
 
 }
