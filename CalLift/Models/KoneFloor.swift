@@ -8,9 +8,16 @@
 
 import Foundation
 
-struct KoneFloor: Decodable {
+struct KoneFloor {
     let id: String
     let index: Int
     let name: String
     let typicalLevel: Int
+
+    init(dict: NSDictionary) {
+        self.id = dict.value(forKey: "id") as! String
+        self.index = dict.value(forKey: "index") as! Int
+        self.name = dict.value(forKey: "name") as! String
+        self.typicalLevel = dict.value(forKey: "index") as! Int
+    }
 }

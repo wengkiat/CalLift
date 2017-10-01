@@ -27,7 +27,7 @@ class ViewController: UIViewController {
 
 //        KoneManager.instance.getLevels(liftId: "lift:9990000508:1:2", completion: {_ in return})
 //        KoneManager.instance.getAssignedLift(callId: "986593929", completion: { _ in return })
-        KoneManager.instance.getFloors(completion: { _ in })
+        KoneManager.instance.getFloors(completionHandler: { print($0) })
     }
 
     override func didReceiveMemoryWarning() {

@@ -25,8 +25,8 @@ class KoneManager {
             {
               "template": {
                 "data": [
-                  {"name":"sourceAreaId", "value": "area:\(Constants.KoneAPI.buildingId):\(floorLevelDict[startFloor]!)"},
-                  {"name":"destinationAreaId", "value": "area:\(Constants.KoneAPI.buildingId):\(floorLevelDict[endFloor]!)"}
+                  {"name":"sourceAreaId", "value": "area:\(Constants.KoneAPI.buildingId):1000"},
+                  {"name":"destinationAreaId", "value": "area:\(Constants.KoneAPI.buildingId):2000"}
                 ]
               }
             }
@@ -125,18 +125,21 @@ class KoneManager {
     }
 
     func getFloors(buildingId: Int=Constants.KoneAPI.buildingId,
-                         completion: @escaping (_ destinations: [String: Any]) -> Void) {
+                   completionHandler: @escaping (_ floors: [KoneFloor]) -> Void) {
         let apiEndpoint = "https://api.kone.com/api/building/\(buildingId)"
         var request = URLRequest(url: URL(string: apiEndpoint)!)
         request.httpMethod = Constants.KoneAPI.getMethod
         request.allHTTPHeaderFields = Constants.KoneAPI.getHeaders(contentType: .collection, acceptType: .api)
 
         submitTask(with: request) { (_, data) in
-            guard let dict = data.toDictionary() else {
-                NSLog("No data")
-                return
+            guard let json = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else { return }
+            guard let data = json["data"] as? NSArray else { return }
+            let floors: [KoneFloor] = data.map {
+                guard let dict = $0 as? NSDictionary else { fatalError() }
+                guard let attr = dict.value(forKey: "attributes") as? NSDictionary else { fatalError() }
+                return KoneFloor(dict: attr)
             }
-            completion(dict)
+            completionHandler(floors)
         }
     }
 }
