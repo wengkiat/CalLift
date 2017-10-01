@@ -10,7 +10,7 @@ import EventKit
 import Foundation
 
 class LiftCalendar {
-    
+
     var calendar: EKCalendar!
 
     func getUpcomingEvents() -> [EKEvent] {
@@ -27,5 +27,5 @@ class LiftCalendar {
             return e1.startDate.compare(e2.startDate) == ComparisonResult.orderedAscending
         }
     }
-    
+
 }
