@@ -88,9 +88,7 @@ class BookingVC: UIViewController {
         if self.countdownSec == 0 {
             self.countdownTimer?.invalidate()
         }
-        if countdownSec < 600 {
-            startScan()
-        }
+        startScan()
     }
     
     // MARK: Views
