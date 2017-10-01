@@ -14,7 +14,7 @@ enum ScanState {
     func getLoadingLabel() -> String {
         switch self {
         case .stopped: return "Current floor unknown"
-        case .started: return "Finding current floor"
+        case .started: return ""
         case .found: return ""
         }
     }

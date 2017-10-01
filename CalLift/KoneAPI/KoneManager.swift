@@ -9,9 +9,7 @@
 import Foundation
 
 class KoneManager {
-    private init() {
-        populateFloorData()
-    }
+    private init() {}
     static let instance = KoneManager()
     private let session = URLSession.shared
 

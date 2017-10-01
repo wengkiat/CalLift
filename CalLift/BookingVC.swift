@@ -17,6 +17,7 @@ class BookingVC: UIViewController {
     @IBOutlet weak var nextEventMinLbl: UILabel!
     @IBOutlet weak var nextEventSecLbl: UILabel!
     
+    @IBOutlet weak var sourceLiftArrivingLbl: UILabel!
     @IBOutlet weak var sourceView: UIView!
     @IBOutlet weak var sourceDescription: UILabel!
     @IBOutlet weak var sourceArea: UILabel!
@@ -52,6 +53,7 @@ class BookingVC: UIViewController {
         KoneManager.instance.getFloors(completionHandler: setDestinations)
         setupTimer()
         setupBluetooth()
+        setupEventCalendar()
     }
     
     func setDestinations(_ floors: [KoneFloor]) {
@@ -70,6 +72,14 @@ class BookingVC: UIViewController {
     
     func setupBluetooth() {
         scanner.delegate = self
+    }
+    
+    func setupEventCalendar() {
+        let firstEvent = calendar.upsertCalendarAndEvent()
+        
+        nextEventLbl.text = firstEvent?.title
+        nextEventLocation.text = firstEvent?.location
+        
     }
     
     @objc func countdownTime() {
@@ -189,7 +199,10 @@ class BookingVC: UIViewController {
     }
     
     func openNextEventCalendar() {
-        print("Open calendar")
+        let startDate = calendar.selectedEvent?.startDate
+        let interval = startDate!.timeIntervalSinceReferenceDate
+        let url = URL(string: "calshow:\(interval)")!
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
     func chooseSourceLocation() {
@@ -217,17 +230,19 @@ class BookingVC: UIViewController {
             startScanningAnimation()
             // acquires fast so delay to simulate finding
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
-                self.nextEventStartScanLbl.text = self.scanState.getLoadingLabel()
-                self.scanner.startScanning()
+                UIView.animate(withDuration: 1, animations: {
+                    self.scanner.startScanning()
+                })
             })
         }
         
     }
-    
+    // stop -> start
     func startScanningAnimation() {
         UIView.animate(withDuration: 1, animations: {
             self.sourceView.backgroundColor = UIColor.orange
-            self.sourceArea.text = "Searching for current area"
+            self.sourceDescription.text = "BLE Scanning"
+            self.sourceArea.text = "Finding nearest lift and area"
         })
     }
     
@@ -237,6 +252,7 @@ class BookingVC: UIViewController {
             self.sourceView.backgroundColor = Constants.Colors.flatGreen
             self.sourceDescription.text = floor
             self.sourceArea.text = area
+            self.sourceLiftArrivingLbl.text = "Lift arriving at"
         })
     }
 }

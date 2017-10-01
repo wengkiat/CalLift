@@ -30,6 +30,7 @@ struct Constants {
     struct LiftCalendar {
         static let endMonths = 1
         static let floorString = "floor "
+        static let defaultCalName = "CalLIFT"
     }
 
     struct Bluetooth {
