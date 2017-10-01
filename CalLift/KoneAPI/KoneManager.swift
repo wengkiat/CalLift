@@ -32,45 +32,56 @@ class KoneManager {
         }
     }
 
-    func getLevel(at floor: String) -> Int? {
-        return floors.first { String($0.name.split(separator: " ").last!) == floor }?.typicalLevel
+    func getFloor(withName name: String) -> KoneFloor? {
+        return floors.first { String($0.name.split(separator: " ").last!) == name }!
     }
 
-    func bookLift(from startFloor: String, to endFloor: String, completion: @escaping (_ lift: KoneLift) -> Void) {
+    func bookLift(from startFloorName: String, to endFloorName: String, completion: @escaping (_ lift: KoneLift) -> Void) {
         populateFloorData() { [weak self] in
-            guard let startLevel = self?.getLevel(at: startFloor),
-                let endLevel = self?.getLevel(at: endFloor) else {
+            guard let startFloor = self?.getFloor(withName: startFloorName),
+                let endFloor = self?.getFloor(withName: endFloorName) else {
                     return
             }
-            let postJson = """
-            {
-                "template": {
-                    "data": [
-                        {"name":"sourceAreaId", "value": "area:\(Constants.KoneAPI.buildingId):1000"},
-                        {"name":"destinationAreaId", "value": "area:\(Constants.KoneAPI.buildingId):2000"}
-                    ]
-                }
-            }
-            """
-            let postData = NSData(data: postJson.data(using: .utf8)!) as Data
-            let apiEndpoint = "https://api.kone.com/api/building/\(Constants.KoneAPI.buildingId)/call"
-            var request = URLRequest(url: URL(string: apiEndpoint)!)
-            request.httpMethod = Constants.KoneAPI.postMethod
-            request.allHTTPHeaderFields = Constants.KoneAPI.getHeaders(contentType: .collection, acceptType: .collection)
-            request.httpBody = postData
-            self?.submitTask(with: request) { (response, data) in
-                // Get the call id from this data.
-                guard let res = response as? HTTPURLResponse else { return }
-                guard let headers = res.allHeaderFields as? [String : String] else { return }
-                let callID = String(headers["Location"]!.split(separator: "/").last!)
 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    // Use the call id to get the assigned lift
-                    self?.getAssignedLift(callId: callID) { lift in
-                        completion(lift)
+            self?.getArea(floorId: startFloor.id) { startArea in
+
+                self?.getArea(floorId: endFloor.id) { endArea in
+
+                    let postJson = """
+                    {
+                    "template": {
+                    "data": [
+                    {"name":"sourceAreaId", "value": "\(startArea)"},
+                    {"name":"destinationAreaId", "value": "\(endArea)"}
+                    ]
                     }
+                    }
+                    """
+                    let postData = NSData(data: postJson.data(using: .utf8)!) as Data
+                    let apiEndpoint = "https://api.kone.com/api/building/\(Constants.KoneAPI.buildingId)/call"
+                    var request = URLRequest(url: URL(string: apiEndpoint)!)
+                    request.httpMethod = Constants.KoneAPI.postMethod
+                    request.allHTTPHeaderFields = Constants.KoneAPI.getHeaders(contentType: .collection, acceptType: .collection)
+                    request.httpBody = postData
+                    self?.submitTask(with: request) { (response, data) in
+                        // Get the call id from this data.
+                        guard let res = response as? HTTPURLResponse else { return }
+                        guard let headers = res.allHeaderFields as? [String : String] else { return }
+                        let callID = String(headers["Location"]!.split(separator: "/").last!)
+
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            // Use the call id to get the assigned lift
+                            self?.getAssignedLift(callId: callID) { lift in
+                                completion(lift)
+                            }
+                        }
+                    }
+
                 }
             }
+
+
+
         }
 
     }
@@ -120,12 +131,27 @@ class KoneManager {
         submitTask(with: request) { (_, data) in
             guard let json = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else { return }
             guard let data = json["data"] as? NSArray else { return }
+
+            // Get area map
             let floors: [KoneFloor] = data.map {
                 guard let dict = $0 as? NSDictionary else { fatalError() }
                 guard let attr = dict.value(forKey: "attributes") as? NSDictionary else { fatalError() }
-                return KoneFloor(dict: attr)
+                return KoneFloor(dict: attr, areaMap: [:])
             }
             completionHandler(floors)
+        }
+    }
+
+    func getArea(floorId: String, completionHandler: @escaping(_ area: String) -> Void) {
+        let apiEndpoint = "https://api.kone.com/api/building/\(Constants.KoneAPI.buildingId)/floor/\(floorId)"
+        var request = URLRequest(url: URL(string: apiEndpoint)!)
+        request.httpMethod = Constants.KoneAPI.getMethod
+        request.allHTTPHeaderFields = Constants.KoneAPI.getHeaders(contentType: .collection, acceptType: .api)
+        submitTask(with: request) { (_, data) in
+            guard let json = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else { return }
+            guard let data = (json["data"] as? NSArray)?.object(at: 0) as? NSDictionary else { return }
+            guard let areaId = data.value(forKey: "id") as? String else { return }
+            completionHandler(areaId)
         }
     }
 

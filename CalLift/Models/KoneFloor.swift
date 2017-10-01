@@ -13,11 +13,13 @@ struct KoneFloor {
     let index: Int
     let name: String
     let typicalLevel: Int
+    let areaId: String
 
-    init(dict: NSDictionary) {
+    init(dict: NSDictionary, areaMap: [String: String]) {
         self.id = dict.value(forKey: "id") as! String
         self.index = dict.value(forKey: "index") as! Int
         self.name = dict.value(forKey: "name") as! String
         self.typicalLevel = dict.value(forKey: "typicalLevel") as! Int
+        self.areaId = "" // areaMap[id]
     }
 }
