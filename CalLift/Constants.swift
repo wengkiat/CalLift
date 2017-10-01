@@ -7,7 +7,7 @@
 //
 
 import CoreBluetooth
-import Foundation
+import UIKit
 
 typealias JSONObject = [String: Any]
 
@@ -51,6 +51,12 @@ struct Constants {
                 "accept": acceptType.rawValue
             ]
         }
+    }
+    
+    struct Colors {
+        static let flatGray = UIColor(red: 149/255.0, green: 165/255.0, blue: 166/255.0, alpha: 1.0)
+        static let flatDarkGreen = UIColor(red: 39/255.0, green: 174/255.0, blue: 96/255.0, alpha: 1.0)
+        static let flatGreen = UIColor(red: 46/255.0, green: 204/255.0, blue: 113/255.0, alpha: 1.0)
     }
 
 }
