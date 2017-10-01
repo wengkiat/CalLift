@@ -11,15 +11,24 @@ import Foundation
 class KoneManager {
     private init() {}
     static let instance = KoneManager()
-    let session = URLSession.shared
+    private let session = URLSession.shared
 
-    func bookLift(sourceAreaId: String, destinationAreaId: String, completion: @escaping (_ message: String) -> Void) {
-        let postJson = """
+    var floorLevelDict = [Int: Int]()
+    var levelFloorDict = [Int: Int]()
+    
+    func populateFloorData() {
+
+
+    }
+
+    func bookLift(from startFloor: Int, to endFloor: Int, completion: @escaping (_ message: String) -> Void) {
+        let postJson =
+        """
             {
               "template": {
                 "data": [
-                  {"name":"sourceAreaId", "value": "area:\(sourceAreaId):1000"},
-                  {"name":"destinationAreaId", "value": "area:\(destinationAreaId):2000"}
+                  {"name":"sourceAreaId", "value": "area:\(Constants.KoneAPI.buildingId):\(floorLevelDict[startFloor]!)"},
+                  {"name":"destinationAreaId", "value": "area:\(Constants.KoneAPI.buildingId):\(floorLevelDict[endFloor]!)"}
                 ]
               }
             }
@@ -28,14 +37,22 @@ class KoneManager {
 
         let apiEndpoint = "https://api.kone.com/api/building/\(Constants.KoneAPI.buildingId)/call"
         var request = URLRequest(url: URL(string: apiEndpoint)!)
-        request.httpMethod = "POST"
-        request.allHTTPHeaderFields = Constants.KoneAPI.headers
+        request.httpMethod = Constants.KoneAPI.postMethod
+        request.allHTTPHeaderFields = Constants.KoneAPI.getHeaders(contentType: .collection, acceptType: .api)
         request.httpBody = postData
+        submitTask(with: request) { (response, data) in
+            // Get the call id from this data.
+            print(response)
+        }
+    }
 
-        let dataTask = session.dataTask(with: request,  completionHandler: {(data, res, err) in
-            if err != nil {
-                print(err.debugDescription)
-            } else {
+    private func submitTask(with request: URLRequest, completionHandler: @escaping (URLResponse, Data) -> Void) {
+        session.dataTask(with: request) {(data, res, err) in
+            DispatchQueue.main.async {
+                guard err != nil else {
+                    print(err.debugDescription)
+                    return
+                }
                 guard let response = res as? HTTPURLResponse else {
                     NSLog("No response!")
                     return
@@ -44,23 +61,17 @@ class KoneManager {
                     NSLog("Parse JSON \(response)")
                     return
                 }
-                let responseString = "Success"
-                completion(responseString)
+                completionHandler(response, data!)
             }
-        })
-        dataTask.resume()
+        }.resume()
     }
 
     func getAssignedLift(callId: String, completion: @escaping(_ message: String) -> Void) {
         let urlEndpoint = "https://api.kone.com/api/building/\(Constants.KoneAPI.buildingId)/call/\(callId)"
         var request = URLRequest(url: URL(string: urlEndpoint)!)
         request.httpMethod = "GET"
-        var headers = Constants.KoneAPI.headers
-        headers["accept"] = "application/javascript"
-        headers["content-type"] = "application/vnd.collection+json"
-        request.allHTTPHeaderFields = headers
+        request.allHTTPHeaderFields = Constants.KoneAPI.getHeaders(contentType: .collection, acceptType: .javascript)
 
-        let session = URLSession.shared
         session.dataTask(with: request,  completionHandler: {(data, res, err) in
             if err != nil {
                 print(err.debugDescription)
@@ -86,87 +97,47 @@ class KoneManager {
     func getLevels(liftId: String, completion: @escaping(_ message: String) -> Void) {
         let urlEndpoint = "https://api.kone.com/api/building/\(Constants.KoneAPI.buildingId)/lift/\(liftId)/liftlevel"
         var request = URLRequest(url: URL(string: urlEndpoint)!)
-        request.httpMethod = "GET"
-        var headers = Constants.KoneAPI.headers
-        headers["accept"] = "application/vnd.api+json"
-        request.allHTTPHeaderFields = headers
+        request.httpMethod = Constants.KoneAPI.getMethod
+        request.allHTTPHeaderFields = Constants.KoneAPI.getHeaders(contentType: .collection, acceptType: .api)
 
-        let session = URLSession.shared
-        session.dataTask(with: request,  completionHandler: {(data, res, err) in
-            if err != nil {
-                print(err.debugDescription)
-            } else {
-                guard let response = res as? HTTPURLResponse else {
-                    NSLog("No response!")
-                    return
-                }
-                guard Constants.isDemo else {
-                    NSLog("Parse JSON \(response)")
-                    return
-                }
-                // Parse data to get lift floor and door state
-                guard let json = try! JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any] else { return }
-                guard let data = json["data"] as? [[String : Any]] else { return }
-                print(data)
-                completion("1")
-            }
-        }).resume()
+        submitTask(with: request) { (_, data) in
+            // Parse data to get lift floor and door state
+            guard let json = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] else { return }
+            guard let data = json["data"] as? [[String : Any]] else { return }
+            print(data)
+            completion("1")
+        }
     }
 
     func getLiftState(liftId: String, completion: @escaping (_ message: String) -> Void) {
         let urlEndpoint = "https://api.kone.com/api/building/\(Constants.KoneAPI.buildingId)/lift/\(liftId)/liftstate"
         var request = URLRequest(url: URL(string: urlEndpoint)!)
-        request.httpMethod = "GET"
-        var headers = Constants.KoneAPI.headers
-        headers["accept"] = "application/vnd.collection+json"
-        request.allHTTPHeaderFields = headers
+        request.httpMethod = Constants.KoneAPI.getMethod
+        request.allHTTPHeaderFields = Constants.KoneAPI.getHeaders(contentType: .collection, acceptType: .collection)
 
-        let session = URLSession.shared
-        session.dataTask(with: request,  completionHandler: {(data, res, err) in
-            if err != nil {
-                print(err.debugDescription)
-            } else {
-                guard let response = res as? HTTPURLResponse else {
-                    NSLog("No response!")
-                    return
-                }
-                guard Constants.isDemo else {
-                    NSLog("Parse JSON \(response)")
-                    return
-                }
-                // Parse data to get lift floor and door state
-                guard let json = try! JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any] else { return }
-                guard let collection = json["collection"] as? [String : Any] else { return }
-                guard let items = collection["items"] as? [[String: Any]] else { return }
-                print(items)
-                completion("1")
-            }
-        }).resume()
+        submitTask(with: request) { (_, data) in
+            // Parse data to get lift floor and door state
+            guard let json = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] else { return }
+            guard let collection = json["collection"] as? [String : Any] else { return }
+            guard let items = collection["items"] as? [[String: Any]] else { return }
+            print(items)
+            completion("1")
+        }
     }
 
     func getDestinations(buildingId: Int=Constants.KoneAPI.buildingId,
                          completion: @escaping (_ destinations: [String: Any]) -> Void) {
-        let headers = [
-            "x-ibm-client-id": Constants.KoneAPI.clientId,
-            "x-ibm-client-secret": Constants.KoneAPI.secretKey,
-            "accept": "application/vnd.api+json"
-        ]
         let apiEndpoint = "https://api.kone.com/api/building/\(buildingId)"
         var request = URLRequest(url: URL(string: apiEndpoint)!)
-        request.httpMethod = "GET"
-        request.allHTTPHeaderFields = headers
-        
-        let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
-            guard error == nil else {
-                NSLog(error!.localizedDescription)
-                return
-            }
-            guard data != nil, let dict = data!.toDictionary() else {
+        request.httpMethod = Constants.KoneAPI.getMethod
+        request.allHTTPHeaderFields = Constants.KoneAPI.getHeaders(contentType: .collection, acceptType: .api)
+
+        submitTask(with: request) { (_, data) in
+            guard let dict = data.toDictionary() else {
                 NSLog("No data")
                 return
             }
             completion(dict)
-        })
-        dataTask.resume()
+        }
     }
 }
