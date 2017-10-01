@@ -28,22 +28,11 @@ class BookingVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        KoneManager.instance.getDestinations(completion: showDestinations)
-        
-        setupBgView()
-        setupEventViews()
-        
-        displayCallNowBtn()
+        KoneManager.instance.getFloors(completionHandler: showDestinations)
     }
     
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-    
-    // MARK: - Setup
-    @objc func showDestinations(_ dict: [String: Any]) {
-        print(dict.getItems())
+    func showDestinations(_ floors: [KoneFloor]) {
+        print(floors)
     }
     
     func setupBgView() {
