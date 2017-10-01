@@ -22,7 +22,6 @@ class ViewController: UIViewController {
         scanner.delegate = self
         calendar.loadCalendars()
         print(calendar.getUpcomingEvents())
-        KoneManager.instance.bookLift()
     }
 
     override func didReceiveMemoryWarning() {
