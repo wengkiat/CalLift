@@ -33,6 +33,24 @@ class BookingVC: UIViewController {
     
     func showDestinations(_ floors: [KoneFloor]) {
         print(floors)
+        
+        setupView()
+        
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
+    // MARK: - Setup
+    func setupView() {
+        setupBgView()
+        setupEventViews()
+        setupCallNowBtn()
+    }
+    
+    @objc func showDestinations(_ dict: [String: Any]) {
+        print(dict.getItems())
     }
     
     func setupBgView() {
@@ -49,9 +67,9 @@ class BookingVC: UIViewController {
     func setupEventViews() {
         let radius = CGFloat(6.0)
         
-        self.nextEventView.setBlur(style: .light, alpha: 0.5, replaceViewAlpha: true)
-        self.sourceView.setBlur(style: .dark, alpha: 0.5, replaceViewAlpha: true)
-        self.destinationView.setBlur(style: .dark, alpha: 0.5, replaceViewAlpha: true)
+        self.nextEventView.setBlur(style: .light, corner: 6, alpha: 0.5, replaceViewAlpha: true, id: "cal")
+        self.sourceView.setBlur(style: .dark, corner: 6, alpha: 0.5, replaceViewAlpha: true, id: "src")
+        self.destinationView.setBlur(style: .dark, corner: 6, alpha: 0.5, replaceViewAlpha: true, id: "dest")
         
         self.sourceView.setCornerRadius(radius: radius)
         self.nextEventView.setCornerRadius(radius: radius)
@@ -60,11 +78,9 @@ class BookingVC: UIViewController {
         self.sourceView.setShadow()
         self.nextEventView.setShadow()
         self.destinationView.setShadow()
-        
-        
     }
 
-    func displayCallNowBtn() {
+    func setupCallNowBtn() {
         if self.callNowBtn != nil {
             return
         }
@@ -73,22 +89,52 @@ class BookingVC: UIViewController {
         let x = view.frame.width * 0.1
         let y = view.frame.height * 0.9
         let frame = CGRect(x: x, y: y, width: width, height: height)
+        let btnColor = UIColor.white.withAlphaComponent(0.24)
         self.callNowBtn = ColoredButton(frame: frame,
-                                         color: UIColor.clear,
+                                         color: btnColor,
                                          borderColor: UIColor.clear)
         self.callNowBtn!.frame = frame
-        self.callNowBtn!.setTitle("Call Now", for: .normal)
+        self.callNowBtn!.setTitle("Call Lift Now", for: .normal)
         self.callNowBtn!.addTarget(self, action: #selector(self.callNowBtnTouched(_:)), for: .touchUpInside)
-        self.callNowBtn!.setBlur(style: .light)
+        self.callNowBtn!.layer.cornerRadius = 6.0
         self.callNowBtn?.setTitleColor(UIColor.white, for: .normal)
         self.view.addSubview(self.callNowBtn!)
     }
     
+    // MARK: - Update
     @objc func callNowBtnTouched(_ sender: AnyObject?) {
-        if sender === self.callNowBtn {
+        if sender === self.callNowBtn!.subviews.last {
             print("CALL LIFT NOW")
         }
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else {
+            print("No touch")
+            return
+        }
+        
+        let touchLocation = touch.location(in: self.view)
+        if nextEventView.frame.contains(touchLocation) {
+            openNextEventCalendar()
+        } else if sourceView.frame.contains(touchLocation) {
+            chooseSourceLocation()
+        } else if destinationView.frame.contains(touchLocation) {
+            chooseDestinationLocation()
+        }
+    }
+    
+    func openNextEventCalendar() {
+        print("Open calendar")
+    }
+    
+    func chooseSourceLocation() {
+        print("Choose source location")
+        
+    }
+    
+    func chooseDestinationLocation() {
+        print("Choose dest Location")
+    }
 
 }
