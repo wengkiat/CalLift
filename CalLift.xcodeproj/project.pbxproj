@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7737BE051F80B38200425739 /* KoneManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7737BE041F80B38200425739 /* KoneManager.swift */; };
 		F151C0631F80603C001B61EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F151C0621F80603C001B61EF /* AppDelegate.swift */; };
 		F151C0651F80603C001B61EF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F151C0641F80603C001B61EF /* ViewController.swift */; };
 		F151C0681F80603C001B61EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F151C0661F80603C001B61EF /* Main.storyboard */; };
@@ -31,6 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7737BE041F80B38200425739 /* KoneManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoneManager.swift; sourceTree = "<group>"; };
 		F151C05F1F80603C001B61EF /* CalLift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalLift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F151C0621F80603C001B61EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F151C0641F80603C001B61EF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -66,6 +68,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7737BE061F80B46200425739 /* KoneAPI */ = {
+			isa = PBXGroup;
+			children = (
+				7737BE041F80B38200425739 /* KoneManager.swift */,
+			);
+			path = KoneAPI;
+			sourceTree = "<group>";
+		};
 		F151C0561F80603C001B61EF = {
 			isa = PBXGroup;
 			children = (
@@ -96,6 +106,7 @@
 				F151C0691F80603C001B61EF /* Assets.xcassets */,
 				F151C06B1F80603C001B61EF /* LaunchScreen.storyboard */,
 				F151C06E1F80603C001B61EF /* Info.plist */,
+				7737BE061F80B46200425739 /* KoneAPI */,
 			);
 			path = CalLift;
 			sourceTree = "<group>";
@@ -234,6 +245,7 @@
 				F16B8FFA1F80911400757225 /* CalendarPermissionsManager.swift in Sources */,
 				F151C0871F806AD9001B61EF /* BluetoothScannerDelegate.swift in Sources */,
 				F151C0841F8067E2001B61EF /* BluetoothScanner.swift in Sources */,
+				7737BE051F80B38200425739 /* KoneManager.swift in Sources */,
 				F151C0651F80603C001B61EF /* ViewController.swift in Sources */,
 				F151C0631F80603C001B61EF /* AppDelegate.swift in Sources */,
 				F151C08C1F80878B001B61EF /* Constants.swift in Sources */,
@@ -390,7 +402,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 93J5N959FE;
+				DEVELOPMENT_TEAM = 8GMX3JSSQ7;
 				INFOPLIST_FILE = CalLift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -406,7 +418,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 93J5N959FE;
+				DEVELOPMENT_TEAM = 8GMX3JSSQ7;
 				INFOPLIST_FILE = CalLift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
