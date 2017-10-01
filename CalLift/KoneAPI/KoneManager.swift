@@ -71,26 +71,14 @@ class KoneManager {
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = Constants.KoneAPI.getHeaders(contentType: .collection, acceptType: .javascript)
 
-        session.dataTask(with: request,  completionHandler: {(data, res, err) in
-            if err != nil {
-                print(err.debugDescription)
-            } else {
-                guard let response = res as? HTTPURLResponse else {
-                    NSLog("No response!")
-                    return
-                }
-                guard Constants.isDemo else {
-                    NSLog("Parse JSON \(response)")
-                    return
-                }
-                // Parse data to get lift floor and door state
-                guard let json = try! JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any] else { return }
-                print(json)
-                guard let data = json["data"] as? [[String : Any]] else { return }
-                print(data)
-                completion("1")
-            }
-        }).resume()
+        submitTask(with: request) { (_, data) in
+            // Parse data to get lift floor and door state
+            guard let json = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] else { return }
+            print(json)
+            guard let data = json["data"] as? [[String : Any]] else { return }
+            print(data)
+            completion("1")
+        }
     }
 
     func getLevels(liftId: String, completion: @escaping(_ message: String) -> Void) {
