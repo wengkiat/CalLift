@@ -10,6 +10,8 @@ import CoreBluetooth
 import Foundation
 
 struct Constants {
+    
+    static let isDemo = true
 
     struct LiftCalendar {
         static let endMonths = 1
