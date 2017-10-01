@@ -51,6 +51,38 @@ class KoneManager {
         dataTask.resume()
     }
 
+    func getAssignedLift(callId: String, completion: @escaping(_ message: String) -> Void) {
+        let urlEndpoint = "https://api.kone.com/api/building/\(Constants.KoneAPI.buildingId)/call/\(callId)"
+        var request = URLRequest(url: URL(string: urlEndpoint)!)
+        request.httpMethod = "GET"
+        var headers = Constants.KoneAPI.headers
+        headers["accept"] = "application/javascript"
+        headers["content-type"] = "application/vnd.collection+json"
+        request.allHTTPHeaderFields = headers
+
+        let session = URLSession.shared
+        session.dataTask(with: request,  completionHandler: {(data, res, err) in
+            if err != nil {
+                print(err.debugDescription)
+            } else {
+                guard let response = res as? HTTPURLResponse else {
+                    NSLog("No response!")
+                    return
+                }
+                guard Constants.isDemo else {
+                    NSLog("Parse JSON \(response)")
+                    return
+                }
+                // Parse data to get lift floor and door state
+                guard let json = try! JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any] else { return }
+                print(json)
+                guard let data = json["data"] as? [[String : Any]] else { return }
+                print(data)
+                completion("1")
+            }
+        }).resume()
+    }
+
     func getLevels(liftId: String, completion: @escaping(_ message: String) -> Void) {
         let urlEndpoint = "https://api.kone.com/api/building/\(Constants.KoneAPI.buildingId)/lift/\(liftId)/liftlevel"
         var request = URLRequest(url: URL(string: urlEndpoint)!)
