@@ -34,6 +34,7 @@
 
 /* Begin PBXFileReference section */
 		7737BE041F80B38200425739 /* KoneManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoneManager.swift; sourceTree = "<group>"; };
+		89E70A631F80D2E400172537 /* 1200px-KONE.svg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1200px-KONE.svg.png"; sourceTree = "<group>"; };
 		F151C05F1F80603C001B61EF /* CalLift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalLift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F151C0621F80603C001B61EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F151C0641F80603C001B61EF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -78,12 +79,21 @@
 			path = KoneAPI;
 			sourceTree = "<group>";
 		};
+		89E70A641F80D2F200172537 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				89E70A631F80D2E400172537 /* 1200px-KONE.svg.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		F151C0561F80603C001B61EF = {
 			isa = PBXGroup;
 			children = (
 				F151C0611F80603C001B61EF /* CalLift */,
 				F151C0761F80603C001B61EF /* CalLiftTests */,
 				F151C0601F80603C001B61EF /* Products */,
+				89E70A641F80D2F200172537 /* Images */,
 			);
 			sourceTree = "<group>";
 		};
