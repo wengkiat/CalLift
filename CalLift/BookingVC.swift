@@ -28,21 +28,23 @@ class BookingVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        KoneManager.instance.getFloors(completionHandler: showDestinations)
-    }
-    
-    func showDestinations(_ floors: [KoneFloor]) {
-        print(floors)
-        
         setupView()
         
+        KoneManager.instance.getFloors(completionHandler: showDestinations)
     }
     
     override var prefersStatusBarHidden: Bool {
         return true
     }
     
-    // MARK: - Setup
+    // MARK: - SETUP
+    // MARK: Data
+    func showDestinations(_ floors: [KoneFloor]) {
+        print(floors)
+    }
+    
+    
+    // MARK: Views
     func setupView() {
         setupBgView()
         setupEventViews()
@@ -101,7 +103,7 @@ class BookingVC: UIViewController {
         self.view.addSubview(self.callNowBtn!)
     }
     
-    // MARK: - Update
+    // MARK: - UPDATE
     @objc func callNowBtnTouched(_ sender: AnyObject?) {
         if sender === self.callNowBtn!.subviews.last {
             print("CALL LIFT NOW")
