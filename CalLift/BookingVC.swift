@@ -15,10 +15,9 @@ class BookingVC: UIViewController {
 
         KoneManager.instance.getFloors(completionHandler: showDestinations)
     }
-    
+
     func showDestinations(_ floors: [KoneFloor]) {
         print(floors)
     }
-    
 
 }

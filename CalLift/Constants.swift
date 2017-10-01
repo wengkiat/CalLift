@@ -24,7 +24,7 @@ enum KoneAcceptType: String {
 }
 
 struct Constants {
-    
+
     static let isDemo = true
 
     struct LiftCalendar {
