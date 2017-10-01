@@ -124,9 +124,8 @@ class KoneManager {
         }
     }
 
-    func getFloors(buildingId: Int=Constants.KoneAPI.buildingId,
-                   completionHandler: @escaping (_ floors: [KoneFloor]) -> Void) {
-        let apiEndpoint = "https://api.kone.com/api/building/\(buildingId)"
+    func getFloors(completionHandler: @escaping (_ floors: [KoneFloor]) -> Void) {
+        let apiEndpoint = "https://api.kone.com/api/building/\(Constants.KoneAPI.buildingId)"
         var request = URLRequest(url: URL(string: apiEndpoint)!)
         request.httpMethod = Constants.KoneAPI.getMethod
         request.allHTTPHeaderFields = Constants.KoneAPI.getHeaders(contentType: .collection, acceptType: .api)
