@@ -20,6 +20,7 @@ class BluetoothScanner: NSObject {
     let BLECharacteristic = "DFB1"
 
     override init() {
+        super.init()
         self.manager = CBCentralManager(delegate: self, queue: nil)
         self.manager.delegate = self
     }

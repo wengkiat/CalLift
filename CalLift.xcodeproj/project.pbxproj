@@ -17,6 +17,7 @@
 		F151C0871F806AD9001B61EF /* BluetoothScannerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F151C0861F806AD9001B61EF /* BluetoothScannerDelegate.swift */; };
 		F151C08C1F80878B001B61EF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F151C08B1F80878B001B61EF /* Constants.swift */; };
 		F151C08E1F808866001B61EF /* LiftCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F151C08D1F808866001B61EF /* LiftCalendar.swift */; };
+		F16B8FFA1F80911400757225 /* CalendarPermissionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16B8FF91F80911400757225 /* CalendarPermissionsManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		F151C0861F806AD9001B61EF /* BluetoothScannerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothScannerDelegate.swift; sourceTree = "<group>"; };
 		F151C08B1F80878B001B61EF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F151C08D1F808866001B61EF /* LiftCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftCalendar.swift; sourceTree = "<group>"; };
+		F16B8FF91F80911400757225 /* CalendarPermissionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPermissionsManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				F151C08D1F808866001B61EF /* LiftCalendar.swift */,
+				F16B8FF91F80911400757225 /* CalendarPermissionsManager.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -228,6 +231,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F151C08E1F808866001B61EF /* LiftCalendar.swift in Sources */,
+				F16B8FFA1F80911400757225 /* CalendarPermissionsManager.swift in Sources */,
 				F151C0871F806AD9001B61EF /* BluetoothScannerDelegate.swift in Sources */,
 				F151C0841F8067E2001B61EF /* BluetoothScanner.swift in Sources */,
 				F151C0651F80603C001B61EF /* ViewController.swift in Sources */,
@@ -388,6 +392,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 93J5N959FE;
 				INFOPLIST_FILE = CalLift/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.edmundmok.CalLift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -403,6 +408,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 93J5N959FE;
 				INFOPLIST_FILE = CalLift/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.edmundmok.CalLift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
