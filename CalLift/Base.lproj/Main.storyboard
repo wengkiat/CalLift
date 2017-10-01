@@ -42,15 +42,6 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bluetooth not scanning" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2gj-Ml-7vy">
-                                        <rect key="frame" x="15" y="55.5" width="275" height="27"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="27" id="z9F-Pm-VUw"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="italicSystem" pointSize="19"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="JCz-sB-vL3">
                                         <rect key="frame" x="15" y="40.5" width="275" height="62.5"/>
                                         <subviews>
@@ -74,15 +65,12 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="2gj-Ml-7vy" firstAttribute="leading" secondItem="VFr-U4-FMS" secondAttribute="leading" constant="15" id="1Wj-Hh-zq5"/>
                                     <constraint firstAttribute="trailing" secondItem="XO8-0m-Fcr" secondAttribute="trailing" constant="15" id="HTh-xf-Nh0"/>
                                     <constraint firstItem="JCz-sB-vL3" firstAttribute="leading" secondItem="VFr-U4-FMS" secondAttribute="leading" constant="15" id="KnV-6T-jR8"/>
-                                    <constraint firstItem="2gj-Ml-7vy" firstAttribute="top" secondItem="XO8-0m-Fcr" secondAttribute="bottom" constant="15" id="PAd-fe-a3M"/>
                                     <constraint firstAttribute="height" constant="129" id="TCI-o9-FYq"/>
                                     <constraint firstItem="XO8-0m-Fcr" firstAttribute="leading" secondItem="VFr-U4-FMS" secondAttribute="leading" constant="15" id="UjH-m6-95H"/>
                                     <constraint firstItem="XO8-0m-Fcr" firstAttribute="top" secondItem="VFr-U4-FMS" secondAttribute="top" constant="15" id="aGE-ld-cdH"/>
                                     <constraint firstItem="JCz-sB-vL3" firstAttribute="top" secondItem="XO8-0m-Fcr" secondAttribute="bottom" id="iFk-Qr-8s0"/>
-                                    <constraint firstAttribute="trailing" secondItem="2gj-Ml-7vy" secondAttribute="trailing" constant="15" id="jbF-yu-wK7"/>
                                     <constraint firstAttribute="trailing" secondItem="JCz-sB-vL3" secondAttribute="trailing" constant="15" id="rRf-Zp-bSV"/>
                                 </constraints>
                             </view>
@@ -234,7 +222,6 @@
                         <outlet property="nextEventLocation" destination="Fou-71-X2w" id="xia-cB-zC9"/>
                         <outlet property="nextEventMinLbl" destination="fOy-bf-2rb" id="9pQ-k0-8iZ"/>
                         <outlet property="nextEventSecLbl" destination="QQr-QO-U0M" id="ik4-PT-S7j"/>
-                        <outlet property="nextEventStartScanLbl" destination="2gj-Ml-7vy" id="HPR-xs-tyg"/>
                         <outlet property="nextEventView" destination="qiM-6W-it3" id="HiN-hy-2Ts"/>
                         <outlet property="sourceArea" destination="frB-bc-6Xe" id="SGH-aj-TCc"/>
                         <outlet property="sourceDescription" destination="uWy-BT-etr" id="amR-BG-Ngo"/>

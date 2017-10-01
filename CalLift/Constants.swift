@@ -34,7 +34,7 @@ struct Constants {
     }
 
     struct Bluetooth {
-        static let uuid = CBUUID(string: "FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFF0")
+        static let uuid = CBUUID(string: "AFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFA0")  // A
         static let uuidKey = "kCBAdvDataServiceUUIDs"
     }
 
@@ -56,16 +56,19 @@ struct Constants {
     
     struct Mock {
         struct Source {
-            static let floor = "Basement 1"
+            static let floor = "Floor K1"
             static let area = "Lift Lobby B1A"
         }
         struct Destination {
-            static let floor = "Penhouse Floor"
-            static let area = "PnP Conference Room"
+            static let index = 4
+            static let floor = "Floor 3"
+            static let area = "PnP Conference Room Lift"
         }
     }
     
     struct Colors {
+        static let flatYellow = UIColor(red: 241/255.0, green: 196/255.0, blue: 15/255.0, alpha: 1.0)
+        static let flatOrange = UIColor(red: 230/255.0, green: 126/255.0, blue: 34/255.0, alpha: 1.0)
         static let flatGray = UIColor(red: 149/255.0, green: 165/255.0, blue: 166/255.0, alpha: 1.0)
         static let flatDarkGreen = UIColor(red: 39/255.0, green: 174/255.0, blue: 96/255.0, alpha: 1.0)
         static let flatGreen = UIColor(red: 46/255.0, green: 204/255.0, blue: 113/255.0, alpha: 1.0)

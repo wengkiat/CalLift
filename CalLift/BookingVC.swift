@@ -7,13 +7,13 @@
 //
 
 import UIKit
+import EventKit
 
 class BookingVC: UIViewController {
 
     @IBOutlet weak var nextEventView: UIView!
     @IBOutlet weak var nextEventLbl: UILabel!
     @IBOutlet weak var nextEventLocation: UILabel!
-    @IBOutlet weak var nextEventStartScanLbl: UILabel!
     @IBOutlet weak var nextEventMinLbl: UILabel!
     @IBOutlet weak var nextEventSecLbl: UILabel!
     
@@ -32,10 +32,13 @@ class BookingVC: UIViewController {
     var countdownTimer: Timer?
     
     var scanState = ScanState.stopped
-    var floors: [KoneFloor] = []
     
     let calendar = LiftCalendar()
     let scanner = BluetoothScanner()
+    
+    var selectedLift: KoneLift?
+    var srcFloorIndex: Int?
+    var destFloorIndex = Constants.Mock.Destination.index
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,14 +53,9 @@ class BookingVC: UIViewController {
     // MARK: - SETUP
     // MARK: Data
     func setupData() {
-        KoneManager.instance.getFloors(completionHandler: setDestinations)
         setupTimer()
         setupBluetooth()
         setupEventCalendar()
-    }
-    
-    func setDestinations(_ floors: [KoneFloor]) {
-        self.floors = floors
     }
     
     func setupTimer() {
@@ -75,11 +73,9 @@ class BookingVC: UIViewController {
     }
     
     func setupEventCalendar() {
-        let firstEvent = calendar.upsertCalendarAndEvent()
-        
-        nextEventLbl.text = firstEvent?.title
-        nextEventLocation.text = firstEvent?.location
-        
+        let nextEvent = calendar.upsertCalendarAndEvent()
+        nextEventLbl.text = nextEvent?.title
+        nextEventLocation.text = nextEvent?.location
     }
     
     @objc func countdownTime() {
@@ -104,10 +100,6 @@ class BookingVC: UIViewController {
         }
     }
     
-    @objc func showDestinations(_ dict: [String: Any]) {
-        print(dict.getItems())
-    }
-    
     func populateInitialData() {
         updateEventCountdownLbl()
         initializeSourceLiftLbl()
@@ -116,7 +108,6 @@ class BookingVC: UIViewController {
     func initializeSourceLiftLbl() {
         sourceArea.text = ""
         sourceDescription.text =  ""
-        nextEventStartScanLbl.text = scanState.getLoadingLabel()
     }
     
     func padTime(_ timeDigits: Int) -> String {
@@ -177,8 +168,13 @@ class BookingVC: UIViewController {
     // MARK: - UPDATE
     // MARK: Button handler
     @objc func callNowBtnTouched(_ sender: AnyObject?) {
-        if sender === self.callNowBtn!.subviews.last {
-            print("CALL LIFT NOW")
+        if sender === self.callNowBtn! {
+             // TODO: Replace mock data
+            let srcName = KoneManager.instance.floors[srcFloorIndex!].name
+            let destName = KoneManager.instance.floors[destFloorIndex].name
+            KoneManager.instance.bookLift(from: srcName , to: destName, completion: { lift in
+                self.selectedLift = lift
+            })
         }
     }
     
@@ -240,21 +236,24 @@ class BookingVC: UIViewController {
     // stop -> start
     func startScanningAnimation() {
         UIView.animate(withDuration: 1, animations: {
-            self.sourceView.backgroundColor = UIColor.orange
+            self.sourceView.backgroundColor = Constants.Colors.flatYellow
             self.sourceDescription.text = "BLE Scanning"
-            self.sourceArea.text = "Finding nearest lift and area"
+            self.sourceArea.text = "Finding nearest lift & floor"
         })
     }
     
     // start -> found
     func foundSourceAnimation(area: String, floor: String) {
+        self.scanState = .found
         UIView.animate(withDuration: 0.5, animations: {
             self.sourceView.backgroundColor = Constants.Colors.flatGreen
+            self.callNowBtn?.backgroundColor = Constants.Colors.flatGreen
             self.sourceDescription.text = floor
             self.sourceArea.text = area
             self.sourceLiftArrivingLbl.text = "Lift arriving at"
         })
     }
+
 }
 
 extension BookingVC: BluetoothScannerDelegate {
@@ -263,8 +262,16 @@ extension BookingVC: BluetoothScannerDelegate {
         NSLog("Scanner is ready")
     }
     
+    // start -> found
     func foundUUID(_ uuid: String) {
         NSLog("Found uuid \(uuid)")
+        var srcFloor = 0
+        for digit in uuid {
+            if digit == "A" {
+                srcFloor += 1
+            }
+        }
+        self.srcFloorIndex = srcFloor
         // TODO: Replace with iBeacon BLE Message
         foundSourceAnimation(area: Constants.Mock.Source.area, floor: Constants.Mock.Source.floor)
         scanner.stopScanning()

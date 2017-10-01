@@ -93,7 +93,7 @@ class LiftCalendar {
         newEvent.startDate = startDate
         newEvent.endDate = endDate
         newEvent.title = "Project Meeting"
-        newEvent.location = "PnP Conference Room"
+        newEvent.location = Constants.Mock.Destination.floor
         do {
             try eventStore.save(newEvent, span: .thisEvent, commit: true)
         } catch {
