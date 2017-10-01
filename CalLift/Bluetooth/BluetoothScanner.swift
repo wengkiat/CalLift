@@ -39,7 +39,7 @@ extension BluetoothScanner: CBCentralManagerDelegate {
 
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         self.delegate?.nearbyBluetoothDevicesUpdated()
-        print("Discovered: " + peripheral)
+        print(peripheral)
     }
 
     func centralManagerDidUpdateState(_ central: CBCentralManager) {

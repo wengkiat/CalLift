@@ -11,7 +11,15 @@ import Foundation
 
 class LiftCalendar {
 
-    var calendar: EKCalendar!
+    let calendars: [EKCalendar]
+
+    init(calendars: [EKCalendar]) {
+        self.calendars = calendars
+    }
+
+    func getNextEvent() -> EKEvent? {
+        return getUpcomingEvents().first
+    }
 
     func getUpcomingEvents() -> [EKEvent] {
         let startDate = Date()
@@ -22,7 +30,8 @@ class LiftCalendar {
 
     func getEvents(from startDate: Date, to endDate: Date) -> [EKEvent] {
         let eventStore = EKEventStore()
-        let eventsPredicate = eventStore.predicateForEvents(withStart: startDate, end: endDate, calendars: [calendar])
+        let eventsPredicate = eventStore.predicateForEvents(
+            withStart: startDate, end: endDate, calendars: calendars)
         return eventStore.events(matching: eventsPredicate).sorted { (e1, e2) -> Bool in
             return e1.startDate.compare(e2.startDate) == ComparisonResult.orderedAscending
         }
