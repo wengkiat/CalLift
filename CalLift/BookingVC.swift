@@ -41,6 +41,7 @@ class BookingVC: UIViewController {
     var destFloorIndex = Constants.Mock.Destination.index
 
     var assignedLift: KoneLift!
+    var nextEvent: EKEvent!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,12 +56,13 @@ class BookingVC: UIViewController {
     // MARK: - SETUP
     // MARK: Data
     func setupData() {
-        setupTimer()
         setupBluetooth()
         setupEventCalendar()
+        setupTimer()
     }
     
     func setupTimer() {
+        self.countdownSec = nextEvent.startDate.timeIntervalSince(Date())
         self.countdownTimer = Timer.scheduledTimer(
             timeInterval: 1,
             target: self,
@@ -75,7 +77,7 @@ class BookingVC: UIViewController {
     }
     
     func setupEventCalendar() {
-        let nextEvent = calendar.upsertCalendarAndEvent()
+        self.nextEvent = calendar.upsertCalendarAndEvent()
         nextEventLbl.text = nextEvent?.title
         nextEventLocation.text = nextEvent?.location
     }
@@ -94,12 +96,17 @@ class BookingVC: UIViewController {
     // MARK: Views
     func setupView() {
         setupBgView()
+        setupDestinationLabel()
         setupEventViews()
         setupCallNowBtn()
         
         if Constants.isDemo {
             populateInitialData()
         }
+    }
+
+    func setupDestinationLabel() {
+        self.destinationDescription.text = self.nextEvent.location!
     }
     
     func populateInitialData() {
