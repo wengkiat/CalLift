@@ -49,14 +49,22 @@ extension UIView {
         self.layer.shadowOffset = CGSize(width: 6.0, height: 6.0)
     }
     
-    func setBlur(style: UIBlurEffectStyle=UIBlurEffectStyle.light, alpha: CGFloat=1.0, replaceViewAlpha: Bool=false) {
+    func setBlur(style: UIBlurEffectStyle=UIBlurEffectStyle.light, corner: CGFloat=0.0,
+                 alpha: CGFloat=1.0, replaceViewAlpha: Bool=false, id: String?=nil) {
         let blurEffect = UIBlurEffect(style: style)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = self.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         blurEffectView.alpha = alpha
+        if corner > 0 {
+            blurEffectView.layer.cornerRadius = corner
+            blurEffectView.clipsToBounds = true
+        }
         if replaceViewAlpha {
             self.backgroundColor = UIColor.clear
+        }
+        if let accessibilityId = id {
+            blurEffectView.accessibilityIdentifier = accessibilityId
         }
         self.insertSubview(blurEffectView, at: 0)
     }
