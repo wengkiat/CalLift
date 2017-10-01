@@ -172,8 +172,11 @@ class BookingVC: UIViewController {
     @objc func callNowBtnTouched(_ sender: AnyObject?) {
         if sender === self.callNowBtn! {
              // TODO: Replace mock data
+            guard srcFloorIndex != nil else { return }
             let srcName = KoneManager.instance.floors[srcFloorIndex!].name
             let destName = KoneManager.instance.floors[destFloorIndex].name
+            self.callNowBtn?.setTitle("Assigning Lift", for: .normal)
+            self.callNowBtn?.setBlur(style: .dark, corner: 6.0, alpha: 0.4)
             KoneManager.instance.bookLift(from: srcName, to: destName, completion: { lift in
                 self.assignedLift = lift
                 self.performSegue(withIdentifier: "BookingSegue", sender: nil)
