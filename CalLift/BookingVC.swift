@@ -70,7 +70,7 @@ class BookingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource 
         picker.frame.origin.x = 0
         picker.frame.origin.y = 0
         picker.frame = view.frame
-        picker.setBlur(style: .light, alpha: 0.8, replaceViewAlpha: true)
+        picker.setBlur(style: .light, alpha: 0.5, replaceViewAlpha: true)
         picker.isHidden = true
         view.addSubview(picker)
         KoneManager.instance.picker = picker
