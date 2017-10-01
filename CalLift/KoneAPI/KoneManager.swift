@@ -17,8 +17,7 @@ class KoneManager {
     var levelFloorDict = [Int: Int]()
     
     func populateFloorData() {
-
-
+        
     }
 
     func bookLift(from startFloor: Int, to endFloor: Int, completion: @escaping (_ message: String) -> Void) {
@@ -33,7 +32,7 @@ class KoneManager {
               }
             }
         """
-        let postData = NSData(data: postJson.data(using: String.Encoding.utf8)!) as Data
+        let postData = NSData(data: postJson.data(using: .utf8)!) as Data
 
         let apiEndpoint = "https://api.kone.com/api/building/\(Constants.KoneAPI.buildingId)/call"
         var request = URLRequest(url: URL(string: apiEndpoint)!)
@@ -49,7 +48,7 @@ class KoneManager {
     private func submitTask(with request: URLRequest, completionHandler: @escaping (URLResponse, Data) -> Void) {
         session.dataTask(with: request) {(data, res, err) in
             DispatchQueue.main.async {
-                guard err != nil else {
+                guard err == nil else {
                     print(err.debugDescription)
                     return
                 }
@@ -98,11 +97,12 @@ class KoneManager {
         let urlEndpoint = "https://api.kone.com/api/building/\(Constants.KoneAPI.buildingId)/lift/\(liftId)/liftlevel"
         var request = URLRequest(url: URL(string: urlEndpoint)!)
         request.httpMethod = Constants.KoneAPI.getMethod
-        request.allHTTPHeaderFields = Constants.KoneAPI.getHeaders(contentType: .collection, acceptType: .api)
+        request.allHTTPHeaderFields = Constants.KoneAPI.getHeaders(contentType: .collection, acceptType: .collection)
 
         submitTask(with: request) { (_, data) in
             // Parse data to get lift floor and door state
             guard let json = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] else { return }
+            print(json)
             guard let data = json["data"] as? [[String : Any]] else { return }
             print(data)
             completion("1")
@@ -125,7 +125,7 @@ class KoneManager {
         }
     }
 
-    func getDestinations(buildingId: Int=Constants.KoneAPI.buildingId,
+    func getFloors(buildingId: Int=Constants.KoneAPI.buildingId,
                          completion: @escaping (_ destinations: [String: Any]) -> Void) {
         let apiEndpoint = "https://api.kone.com/api/building/\(buildingId)"
         var request = URLRequest(url: URL(string: apiEndpoint)!)

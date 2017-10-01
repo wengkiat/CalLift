@@ -13,7 +13,7 @@ class BookingVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        KoneManager.instance.getDestinations(completion: showDestinations)
+        KoneManager.instance.getFloors(completion: showDestinations)
     }
     
     @objc func showDestinations(_ dict: [String: Any]) {
