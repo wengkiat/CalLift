@@ -14,7 +14,7 @@ class ColoredButton: UIButton {
         self.backgroundColor = color
         self.layer.borderColor = borderColor.cgColor
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.layer.cornerRadius = 6
@@ -25,9 +25,8 @@ class ColoredButton: UIButton {
         
         self.setShadow()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
-

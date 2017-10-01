@@ -10,7 +10,7 @@ import UIKit
 
 extension Data {
     func toDictionary() -> [String: Any]? {
-        
+
         guard let responseString = String(data: self, encoding: String.Encoding.utf8),
             let data = responseString.data(using: .utf8) else {
                 NSLog("JSON Formating Invalid")
@@ -69,4 +69,3 @@ extension UIView {
         self.insertSubview(blurEffectView, at: 0)
     }
 }
-

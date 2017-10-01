@@ -17,7 +17,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
-
         CalendarPermissionsManager.sharedInstance.getPermissions()
         scanner.delegate = self
         calendar.loadCalendars()
@@ -27,7 +26,8 @@ class ViewController: UIViewController {
 
 //        KoneManager.instance.getLevels(liftId: "lift:9990000508:1:2", completion: {_ in return})
 //        KoneManager.instance.getAssignedLift(callId: "986593929", completion: { _ in return })
-        KoneManager.instance.getFloors(completionHandler: { print($0) })
+//        KoneManager.instance.getFloors(completionHandler: { print($0) })
+        KoneManager.instance.bookLift(from: 1, to: 10, completion: { _ in })
     }
 
     override func didReceiveMemoryWarning() {
