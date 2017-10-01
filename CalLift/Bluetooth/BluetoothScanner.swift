@@ -26,7 +26,7 @@ class BluetoothScanner: NSObject {
     }
 
     func startScanning() {
-        self.manager.scanForPeripherals(withServices: [CBUUID(string: self.BLEService)], options: nil)
+        self.manager.scanForPeripherals(withServices: nil, options: nil)
     }
 
     func stopScanning() {
@@ -39,11 +39,15 @@ class BluetoothScanner: NSObject {
 extension BluetoothScanner: CBCentralManagerDelegate {
 
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+        guard let uuids = advertisementData[Constants.Bluetooth.uuidKey] as? NSMutableArray else { return }
+        guard let uuid = uuids.firstObject as? CBUUID else { return }
         self.delegate?.nearbyBluetoothDevicesUpdated()
-        print(peripheral)
+        // Need to search for this specific uuid
+        self.manager.scanForPeripherals(withServices: [uuid], options: nil)
     }
 
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        self.delegate?.readyToScan()
         print(central.state)
         return
     }

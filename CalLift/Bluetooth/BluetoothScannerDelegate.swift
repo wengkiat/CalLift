@@ -10,6 +10,7 @@ import Foundation
 
 protocol BluetoothScannerDelegate: class {
 
+    func readyToScan()
     func nearbyBluetoothDevicesUpdated()
 
 }

@@ -10,16 +10,32 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    let scanner = BluetoothScanner()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
         CalendarPermissionsManager.sharedInstance.getPermissions()
+        scanner.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+}
+
+// MARK: BluetoothScannerDelegate
+extension ViewController: BluetoothScannerDelegate {
+
+    func readyToScan() {
+        scanner.startScanning()
+    }
+
+    func nearbyBluetoothDevicesUpdated() {
+        print("Hey")
     }
 
 }
