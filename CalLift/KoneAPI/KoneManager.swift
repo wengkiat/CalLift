@@ -13,8 +13,7 @@ class KoneManager {
     static let instance = KoneManager()
     private let session = URLSession.shared
 
-    var floorLevelDict = [Int: Int]()
-    var levelFloorDict = [Int: Int]()
+    var floors = [KoneFloor]()
     
     func populateFloorData() {
         
