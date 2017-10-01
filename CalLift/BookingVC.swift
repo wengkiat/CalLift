@@ -38,7 +38,7 @@ class BookingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource 
     
     var selectedLift: KoneLift?
     var srcFloorIndex: Int?
-    var destFloorIndex = Constants.Mock.Destination.index
+    var destFloorIndex: Int?
 
     var assignedLift: KoneLift!
     var nextEvent: EKEvent!
@@ -106,9 +106,7 @@ class BookingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource 
         if self.countdownSec == 0 {
             self.countdownTimer?.invalidate()
         }
-        if countdownSec < 600 {
-            startScan()
-        }
+        startScan()
     }
     
     // MARK: Views
@@ -199,7 +197,7 @@ class BookingVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource 
              // TODO: Replace mock data
             guard srcFloorIndex != nil else { return }
             let srcName = KoneManager.instance.floors[srcFloorIndex!].name
-            let destName = KoneManager.instance.floors[destFloorIndex].name
+            let destName = nextEvent.location!
             self.callNowBtn?.setTitle("Assigning Lift", for: .normal)
             self.callNowBtn?.setBlur(style: .dark, corner: 6.0, alpha: 0.4)
             KoneManager.instance.bookLift(from: srcName, to: destName, completion: { lift in

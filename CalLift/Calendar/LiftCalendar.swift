@@ -52,10 +52,17 @@ class LiftCalendar {
             return firstEvent
         } else {
             self.selected = self.calendars.first
-            let nextEvent = getUpcomingEvents().first!
+            let nextEvent = getNextEvent()
             self.selectedEvent = nextEvent
             return nextEvent
         }
+    }
+
+    func getNextEvent() -> EKEvent? {
+        if getUpcomingEvents().count == 0 {
+            return createInitialEvent()
+        }
+        return getUpcomingEvents().first
     }
 
     func insertCalendar(_ name: String) -> EKCalendar? {
