@@ -13,12 +13,6 @@ class KoneManager {
     static let instance = KoneManager()
     
     func bookLift(sourceAreaId: String, destinationAreaId: String, completion: @escaping (_ message: String) -> Void) {
-        let headers = [
-            "x-ibm-client-id": Constants.KoneAPI.clientId,
-            "x-ibm-client-secret": Constants.KoneAPI.secretKey,
-            "content-type": "application/vnd.api+json",
-            "accept": "application/vnd.api+json"
-        ]
         let postJson = """
             {
               "template": {
@@ -34,7 +28,7 @@ class KoneManager {
         let urlEndpoint = "https://api.kone.com/api/building/\(Constants.KoneAPI.buildingId)/call"
         var request = URLRequest(url: URL(string: urlEndpoint)!)
         request.httpMethod = "POST"
-        request.allHTTPHeaderFields = headers
+        request.allHTTPHeaderFields = Constants.KoneAPI.headers
         request.httpBody = postData
 
         let session = URLSession.shared
@@ -52,6 +46,38 @@ class KoneManager {
                 }
                 let responseString = "Success"
                 completion(responseString)
+            }
+        })
+        dataTask.resume()
+    }
+
+    func getLiftState(liftId: String, completion: @escaping (_ message: String) -> Void) {
+        let urlEndpoint = "https://api.kone.com/api/building/\(Constants.KoneAPI.buildingId)/lift/\(liftId)/liftstate"
+        var request = URLRequest(url: URL(string: urlEndpoint)!)
+        request.httpMethod = "GET"
+        request.allHTTPHeaderFields = Constants.KoneAPI.headers
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request,  completionHandler: {(data, res, err) in
+            if err != nil {
+                print(err.debugDescription)
+            } else {
+                guard let response = res as? HTTPURLResponse else {
+                    NSLog("No response!")
+                    return
+                }
+                guard Constants.isDemo else {
+                    NSLog("Parse JSON \(response)")
+                    return
+                }
+
+                // Parse data to get lift floor and door state
+                guard let json = try! JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any] else { return }
+                print(json)
+                guard let collection = json["collection"] as? [String : Any] else { return }
+                guard let items = collection["items"] as? [[String: Any]] else { return }
+
+                print(items)
+                completion("1")
             }
         })
         dataTask.resume()
