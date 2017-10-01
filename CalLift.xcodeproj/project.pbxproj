@@ -15,6 +15,8 @@
 		F151C0781F80603C001B61EF /* CalLiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F151C0771F80603C001B61EF /* CalLiftTests.swift */; };
 		F151C0841F8067E2001B61EF /* BluetoothScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = F151C0831F8067E2001B61EF /* BluetoothScanner.swift */; };
 		F151C0871F806AD9001B61EF /* BluetoothScannerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F151C0861F806AD9001B61EF /* BluetoothScannerDelegate.swift */; };
+		F151C08C1F80878B001B61EF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F151C08B1F80878B001B61EF /* Constants.swift */; };
+		F151C08E1F808866001B61EF /* LiftCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F151C08D1F808866001B61EF /* LiftCalendar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,8 @@
 		F151C0791F80603C001B61EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F151C0831F8067E2001B61EF /* BluetoothScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothScanner.swift; sourceTree = "<group>"; };
 		F151C0861F806AD9001B61EF /* BluetoothScannerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothScannerDelegate.swift; sourceTree = "<group>"; };
+		F151C08B1F80878B001B61EF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		F151C08D1F808866001B61EF /* LiftCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftCalendar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +86,8 @@
 			isa = PBXGroup;
 			children = (
 				F151C0851F806A44001B61EF /* Bluetooth */,
+				F151C0881F8082CE001B61EF /* Calendar */,
+				F151C08B1F80878B001B61EF /* Constants.swift */,
 				F151C0621F80603C001B61EF /* AppDelegate.swift */,
 				F151C0641F80603C001B61EF /* ViewController.swift */,
 				F151C0661F80603C001B61EF /* Main.storyboard */,
@@ -108,6 +114,14 @@
 				F151C0861F806AD9001B61EF /* BluetoothScannerDelegate.swift */,
 			);
 			path = Bluetooth;
+			sourceTree = "<group>";
+		};
+		F151C0881F8082CE001B61EF /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				F151C08D1F808866001B61EF /* LiftCalendar.swift */,
+			);
+			path = Calendar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -213,10 +227,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F151C08E1F808866001B61EF /* LiftCalendar.swift in Sources */,
 				F151C0871F806AD9001B61EF /* BluetoothScannerDelegate.swift in Sources */,
 				F151C0841F8067E2001B61EF /* BluetoothScanner.swift in Sources */,
 				F151C0651F80603C001B61EF /* ViewController.swift in Sources */,
 				F151C0631F80603C001B61EF /* AppDelegate.swift in Sources */,
+				F151C08C1F80878B001B61EF /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
