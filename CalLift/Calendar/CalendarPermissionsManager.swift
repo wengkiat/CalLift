@@ -14,9 +14,13 @@ import Foundation
  */
 class CalendarPermissionsManager {
 
+    static let sharedInstance = CalendarPermissionsManager()
+
     var status: EKAuthorizationStatus {
         return EKEventStore.authorizationStatus(for: .event)
     }
+
+    private init() { }
 
     // Keep asking for permission until we get it
     func getPermissions() {

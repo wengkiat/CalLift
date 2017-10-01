@@ -10,13 +10,11 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    let permissions = CalendarPermissionsManager()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
-        self.permissions.getPermissions()
+        CalendarPermissionsManager.sharedInstance.getPermissions()
     }
 
     override func didReceiveMemoryWarning() {
