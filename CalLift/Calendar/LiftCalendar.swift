@@ -24,13 +24,6 @@ class LiftCalendar {
         self.calendars = EKEventStore().calendars(for: .event)
     }
 
-    func getNextEvent() -> EKEvent? {
-        if getUpcomingEvents().count == 0 {
-            return createInitialEvent()
-        }
-        return getUpcomingEvents().first
-    }
-
     func getUpcomingEvents() -> [EKEvent] {
         let startDate = Date()
         let endDate = Calendar.current.date(
@@ -59,7 +52,7 @@ class LiftCalendar {
             return firstEvent
         } else {
             self.selected = self.calendars.first
-            let nextEvent = getNextEvent()
+            let nextEvent = getUpcomingEvents().first!
             self.selectedEvent = nextEvent
             return nextEvent
         }
