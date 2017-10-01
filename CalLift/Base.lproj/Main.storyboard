@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="YWp-PH-HJc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="167-2b-KpD">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -212,6 +212,7 @@
                         <outlet property="sourceDescription" destination="uWy-BT-etr" id="amR-BG-Ngo"/>
                         <outlet property="sourceLiftArrivingLbl" destination="XO8-0m-Fcr" id="6xa-CK-Qx0"/>
                         <outlet property="sourceView" destination="VFr-U4-FMS" id="5Cm-sy-1em"/>
+                        <segue destination="YWp-PH-HJc" kind="show" identifier="BookingSegue" id="kxD-BY-hH2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Wl-OL-4d5" userLabel="First Responder" sceneMemberID="firstResponder"/>

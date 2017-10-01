@@ -40,6 +40,8 @@ class BookingVC: UIViewController {
     var srcFloorIndex: Int?
     var destFloorIndex = Constants.Mock.Destination.index
 
+    var assignedLift: KoneLift!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupData()
@@ -172,10 +174,18 @@ class BookingVC: UIViewController {
              // TODO: Replace mock data
             let srcName = KoneManager.instance.floors[srcFloorIndex!].name
             let destName = KoneManager.instance.floors[destFloorIndex].name
-            KoneManager.instance.bookLift(from: srcName , to: destName, completion: { lift in
-                self.selectedLift = lift
+            print(srcName)
+            print(destName)
+            KoneManager.instance.bookLift(from: srcName, to: destName, completion: { lift in
+                self.assignedLift = lift
+                self.performSegue(withIdentifier: "BookingSegue", sender: nil)
             })
         }
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let dest = segue.destination as! WaitingViewController
+        dest.assignedLift = self.assignedLift
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
