@@ -37,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		7737BE041F80B38200425739 /* KoneManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KoneManager.swift; sourceTree = "<group>"; };
+		89E70A631F80D2E400172537 /* 1200px-KONE.svg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1200px-KONE.svg.png"; sourceTree = "<group>"; };
 		7737BE111F80C44900425739 /* ColoredButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColoredButton.swift; sourceTree = "<group>"; };
 		77B2541E1F80C9FF00738C80 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		77B254201F80CC5D00738C80 /* BookingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingVC.swift; sourceTree = "<group>"; };
@@ -84,6 +85,13 @@
 			path = KoneAPI;
 			sourceTree = "<group>";
 		};
+		89E70A641F80D2F200172537 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				89E70A631F80D2E400172537 /* 1200px-KONE.svg.png */,
+			);
+			path = Images;
+	};
 		7737BE101F80C44900425739 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -98,6 +106,7 @@
 				F151C0611F80603C001B61EF /* CalLift */,
 				F151C0761F80603C001B61EF /* CalLiftTests */,
 				F151C0601F80603C001B61EF /* Products */,
+				89E70A641F80D2F200172537 /* Images */,
 			);
 			sourceTree = "<group>";
 		};
