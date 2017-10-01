@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
 
     let scanner = BluetoothScanner()
+    let calendar = LiftCalendar()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +19,8 @@ class ViewController: UIViewController {
 
         CalendarPermissionsManager.sharedInstance.getPermissions()
         scanner.delegate = self
+        calendar.loadCalendars()
+        print(calendar.getUpcomingEvents())
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,7 +38,7 @@ extension ViewController: BluetoothScannerDelegate {
     }
 
     func nearbyBluetoothDevicesUpdated() {
-        print("Hey")
+//        print("Hey")
     }
 
 }

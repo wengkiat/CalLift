@@ -11,10 +11,14 @@ import Foundation
 
 class LiftCalendar {
 
-    let calendars: [EKCalendar]
+    var calendars: [EKCalendar]
 
-    init(calendars: [EKCalendar]) {
-        self.calendars = calendars
+    init() {
+        self.calendars = []
+    }
+
+    func loadCalendars() {
+        self.calendars = EKEventStore().calendars(for: .event)
     }
 
     func getNextEvent() -> EKEvent? {
