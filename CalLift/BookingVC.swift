@@ -26,11 +26,15 @@ class BookingVC: UIViewController {
     
     var callNowBtn: ColoredButton?
     
+    var countdownSec: Double = 10 * 60 + 10
+    var countdownTimer: Timer?
+    
+    var floors: [KoneFloor] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupData()
         setupView()
-        
-        KoneManager.instance.getFloors(completionHandler: showDestinations)
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -39,20 +43,56 @@ class BookingVC: UIViewController {
     
     // MARK: - SETUP
     // MARK: Data
-    func showDestinations(_ floors: [KoneFloor]) {
-        print(floors)
+    func setupData() {
+        KoneManager.instance.getFloors(completionHandler: setDestinations)
+        setupTimer()
     }
     
+    func setDestinations(_ floors: [KoneFloor]) {
+        self.floors = floors
+    }
+    
+    func setupTimer() {
+        self.countdownTimer = Timer.scheduledTimer(
+            timeInterval: 1,
+            target: self,
+            selector: #selector(countdownTime),
+            userInfo: nil,
+            repeats: true
+        )
+    }
+    
+    @objc func countdownTime() {
+        self.countdownSec -= 1
+        self.updateEventCountdownLbl()
+        if self.countdownSec == 0 {
+            self.countdownTimer?.invalidate()
+        }
+    }
     
     // MARK: Views
     func setupView() {
         setupBgView()
+        updateEventCountdownLbl()
         setupEventViews()
         setupCallNowBtn()
     }
     
     @objc func showDestinations(_ dict: [String: Any]) {
         print(dict.getItems())
+    }
+    
+    func updateEventCountdownLbl() {
+        let minute = Int(floor(countdownSec / 60))
+        let seconds = Int(countdownSec.truncatingRemainder(dividingBy: 60.0))
+        self.nextEventCountdownLbl.text = "\(padTime(minute)):\(padTime(seconds))"
+    }
+    
+    func padTime(_ timeDigits: Int) -> String {
+        if timeDigits < 10 {
+            return "0" + String(timeDigits)
+        }
+        return String(timeDigits)
     }
     
     func setupBgView() {
