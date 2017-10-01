@@ -44,8 +44,8 @@ extension ViewController: BluetoothScannerDelegate {
         scanner.startScanning()
     }
 
-    func nearbyBluetoothDevicesUpdated() {
-//        print("Hey")
+    func foundUUID(_: String) {
+        print("Found uuid")
     }
-
+    
 }
