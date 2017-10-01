@@ -25,7 +25,7 @@ class ViewController: UIViewController {
         let parser = LiftEventParser(event: calendar.getUpcomingEvents()[2])
 //        print(parser.parse())
 
-        KoneManager.instance.getLiftState(liftId: "lift:9990000508:1:2", completion: {_ in return})
+        KoneManager.instance.getLevels(liftId: "lift:9990000508:1:2", completion: {_ in return})
     }
 
     override func didReceiveMemoryWarning() {

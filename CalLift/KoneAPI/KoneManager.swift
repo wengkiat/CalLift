@@ -51,13 +51,16 @@ class KoneManager {
         dataTask.resume()
     }
 
-    func getLiftState(liftId: String, completion: @escaping (_ message: String) -> Void) {
-        let urlEndpoint = "https://api.kone.com/api/building/\(Constants.KoneAPI.buildingId)/lift/\(liftId)/liftstate"
+    func getLevels(liftId: String, completion: @escaping(_ message: String) -> Void) {
+        let urlEndpoint = "https://api.kone.com/api/building/\(Constants.KoneAPI.buildingId)/lift/\(liftId)/liftlevel"
         var request = URLRequest(url: URL(string: urlEndpoint)!)
         request.httpMethod = "GET"
-        request.allHTTPHeaderFields = Constants.KoneAPI.headers
+        var headers = Constants.KoneAPI.headers
+        headers["accept"] = "application/vnd.api+json"
+        request.allHTTPHeaderFields = headers
+
         let session = URLSession.shared
-        let dataTask = session.dataTask(with: request,  completionHandler: {(data, res, err) in
+        session.dataTask(with: request,  completionHandler: {(data, res, err) in
             if err != nil {
                 print(err.debugDescription)
             } else {
@@ -69,16 +72,44 @@ class KoneManager {
                     NSLog("Parse JSON \(response)")
                     return
                 }
-
                 // Parse data to get lift floor and door state
                 guard let json = try! JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any] else { return }
-                print("json")
-                print(json)
-                guard let collection = json["collection"] as? [String : Any] else { return }
-                guard let items = collection["items"] as? [[String: Any]] else { return }
+                guard let data = json["data"] as? [[String : Any]] else { return }
+                print(data)
                 completion("1")
             }
-        })
+        }).resume()
+    }
+
+    func getLiftState(liftId: String, completion: @escaping (_ message: String) -> Void) {
+        let urlEndpoint = "https://api.kone.com/api/building/\(Constants.KoneAPI.buildingId)/lift/\(liftId)/liftstate"
+        var request = URLRequest(url: URL(string: urlEndpoint)!)
+        request.httpMethod = "GET"
+        var headers = Constants.KoneAPI.headers
+        headers["accept"] = "application/vnd.collection+json"
+        request.allHTTPHeaderFields = headers
+
+        let session = URLSession.shared
+        session.dataTask(with: request,  completionHandler: {(data, res, err) in
+            if err != nil {
+                print(err.debugDescription)
+            } else {
+                guard let response = res as? HTTPURLResponse else {
+                    NSLog("No response!")
+                    return
+                }
+                guard Constants.isDemo else {
+                    NSLog("Parse JSON \(response)")
+                    return
+                }
+                // Parse data to get lift floor and door state
+                guard let json = try! JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any] else { return }
+                guard let collection = json["collection"] as? [String : Any] else { return }
+                guard let items = collection["items"] as? [[String: Any]] else { return }
+                print(items)
+                completion("1")
+            }
+        }).resume()
     }
 
     func getDestinations(buildingId: Int=Constants.KoneAPI.buildingId,

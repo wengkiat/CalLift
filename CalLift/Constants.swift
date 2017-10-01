@@ -31,7 +31,6 @@ struct Constants {
             "x-ibm-client-id": Constants.KoneAPI.clientId,
             "x-ibm-client-secret": Constants.KoneAPI.secretKey,
             "content-type": "application/vnd.api+json",
-            "accept": "application/vnd.api+json"
         ]
     }
 
